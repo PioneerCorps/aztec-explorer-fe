@@ -4,6 +4,7 @@ import { Link, useParams } from "react-router-dom";
 import { getBlockByHash, getTransactionsByBlockNumber } from "../../api/api";
 import { useEffect, useState } from "react";
 import { formatDate, timeSince } from "../common/getTimePassed";
+import { TxTable } from "../transaction/txTable";
 export const BlockBox = () => {
   const [block, setBlock] = useState([]);
   const [transactions, setTransactions] = useState([]);
@@ -52,56 +53,6 @@ export const BlockBox = () => {
     );
   };
 
-  const renderFields = () => {
-    return (
-      <div className="flex px-[16px] pb-2 font-medium justify-between gap-5 text-sm ">
-        <div className="w-[22%]">Hash</div>
-        <div className="w-[10%]">Block</div>
-        <div className="w-[18%]">Age</div>
-        <div className="w-[10%]">Index</div>
-        <div className="w-[22%]">Nullifier </div>
-        <div className="w-[10%]">Fee</div>
-      </div>
-    );
-  };
-  const renderTxList = () => {
-    const txCards = transactions.map((tx) => {
-      return (
-        <div key={Math.random()} className="card font-light !text-xs">
-          <Link
-            to={`/tx/${tx.hash}`}
-            className="w-[22%] underline text-pastelPink"
-          >
-            {` ${tx.hash.slice(0, 7)}..........${tx.hash.slice(
-              tx.hash.length - 9
-            )}`}
-          </Link>
-          <div className="w-[10%]">
-            <div className="button-purple w-min px-5 py-2 h-full">
-              {tx.blockNumber}
-            </div>
-          </div>
-          <div className="w-[18%]">Timestamp</div>
-          <div className="w-[10%]">{tx.index}</div>
-          <div className="w-[22%] underline text-pastelPink">
-            {` ${tx.hash.slice(0, 5)}..........${tx.hash.slice(
-              tx.hash.length - 7
-            )}`}
-          </div>
-          <div className="w-[10%] button-orange !max-w-none">
-            {tx.transactionFee}
-          </div>
-        </div>
-      );
-    });
-
-    return (
-      <div className="flex flex-col w-full gap-4">
-        {renderFields()}
-        {txCards}
-      </div>
-    );
-  };
   useEffect(() => {
     if (!hash) return;
     const fetchBlock = async () => {
@@ -115,7 +66,6 @@ export const BlockBox = () => {
 
         setBlock(blockInfo);
         setTransactions(transactions);
-        console.log(transactions);
       } catch (err) {
         console.error("Failed to fetch blocks:", err);
         setError("Failed to fetch blocks. Please try again later.");
@@ -137,7 +87,7 @@ export const BlockBox = () => {
         <SearchBar />
       </div>
       {renderBlockInfo()}
-      <div className="secondary-box">{renderTxList()}</div>
+      <TxTable transactions={transactions} loading={loading} error={error} />
     </div>
   );
 };

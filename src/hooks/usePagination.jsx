@@ -6,10 +6,10 @@ export const usePagination = () => {
 
   const [pageBounce, setPageBounce] = useState();
   const [limitBounce, setLimitBounce] = useState();
-  console.log(page, limit);
+
   const renderPaginationButtons = () => {
     return (
-      <div className="flex  pt-2 w-full justify-between">
+      <div className="flex  pt-2 w-full justify-between text-xs font-light">
         <div className="flex gap-2">
           <div className="bg-pastelPurple outline-2 outline-purpleOp50 outline  flex items-center justify-center text-white px-3 h-8 rounded-lg">
             Show rows :

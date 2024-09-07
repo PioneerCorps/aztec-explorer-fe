@@ -3,7 +3,7 @@ import { MdOutlineReceiptLong, MdContentCopy } from "react-icons/md";
 import { getBlockByNumber, getTransactions } from "../../api/api";
 import { useState, useEffect } from "react";
 import LoadingCard from "../common/loadingCard";
-
+import { Copy } from "../common/copyToClipboard";
 export const LatestTx = () => {
   const [transactions, setTransactions] = useState([]);
   const [blockHashes, setBlockHashes] = useState({});
@@ -25,39 +25,45 @@ export const LatestTx = () => {
   };
 
   const latestTxList = () => {
-    console.log(transactions.length <= 0, transactions);
     if (transactions.length <= 0) return <LoadingCard />;
 
     const txCards = transactions.map((tx) => (
       <div key={tx.hash} className="card">
-        <Link to={`/tx/${tx.hash}`} className="flex items-center gap-6 w-1/3">
+        <div className="flex items-center gap-6 w-1/3">
           <MdOutlineReceiptLong className="text-white2 h-8 w-8 min-h-8 min-w-8" />
-          <div className="flex flex-col">
-            <div>Hash</div>
-            <div className="font-thin text-pastelPink underline flex items-center gap-1">
-              {` ${tx.hash.slice(0, 6)}.......${tx.hash.slice(
-                tx.hash.length - 4
-              )}`}
-              <MdContentCopy className="text-white mt-[1px]" />
-            </div>
+          <div className="flex h-full gap-1 items-end">
+            <Link to={`/tx/${tx.hash}`} className="flex flex-col">
+              <div>Hash</div>
+              <div className="font-thin text-pastelPink underline flex items-center gap-1">
+                {` ${tx.hash.slice(0, 6)}.......${tx.hash.slice(
+                  tx.hash.length - 4
+                )}`}
+              </div>
+            </Link>
+            <Copy string={tx.hash} />
           </div>
-        </Link>
+        </div>
         <div className="flex flex-col font-light w-1/3">
           <div className="flex flex-col">
-            <div>{`Included in Block: ${tx.blockNumber}`}</div>
             <Link
               to={`/block/${blockHashes[tx.blockNumber]}`}
-              className="font-thin text-pastelPink underline flex items-center gap-1"
-            >
-              {blockHashes[tx.blockNumber]
-                ? `${blockHashes[tx.blockNumber].slice(
-                    0,
-                    5
-                  )}.............${blockHashes[tx.blockNumber].slice(
-                    blockHashes[tx.blockNumber].length - 5
-                  )}`
-                : "Loading block hash..."}
-            </Link>
+            >{`Block: ${tx.blockNumber}`}</Link>
+            <div className="flex gap-1 items-end">
+              <Link
+                to={`/block/${blockHashes[tx.blockNumber]}`}
+                className="font-thin text-pastelPink underline flex items-center gap-1"
+              >
+                {blockHashes[tx.blockNumber]
+                  ? `${blockHashes[tx.blockNumber].slice(
+                      0,
+                      5
+                    )}.............${blockHashes[tx.blockNumber].slice(
+                      blockHashes[tx.blockNumber].length - 5
+                    )}`
+                  : "Loading block hash..."}
+              </Link>
+              <Copy string={blockHashes[tx.blockNumber]} />
+            </div>
           </div>
         </div>
         <div className="button-orange  text-nowrap !max-w-none text-xs ">

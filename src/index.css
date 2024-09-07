@@ -48,14 +48,14 @@ img {
   object-fit: contain;
 }
 .main {
-  background-image: url("./assets/mount.png");
+  background-image: url("./assets/enhanced.png");
   background-position: bottom;
   background-size: cover;
   background-repeat: no-repeat;
   background-origin: content-box;
 }
 .header {
-  background-image: url("./assets/mount.png");
+  background-image: url("./assets/enhanced.png");
   background-position: bottom;
   background-position-y: 78%;
   background-size: cover;

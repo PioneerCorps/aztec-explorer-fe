@@ -43,7 +43,7 @@ export const TxBox = () => {
 
     fetchTx();
   }, [hash]);
-  console.log(transaction);
+
   const renderTransactionInfo = () => {
     if (!hash)
       return (
