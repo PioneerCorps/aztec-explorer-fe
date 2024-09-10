@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { MdOutlineReceiptLong, MdContentCopy } from "react-icons/md";
 import { getBlockByNumber, getTransactions } from "../../api/api";
 import { useState, useEffect } from "react";
+import { LoadingSkeleton } from "../common/loadingSkeleton";
 import LoadingCard from "../common/loadingCard";
 import { Copy } from "../common/copyToClipboard";
 export const LatestTx = () => {
@@ -25,13 +26,18 @@ export const LatestTx = () => {
   };
 
   const latestTxList = () => {
-    if (transactions.length <= 0) return <LoadingCard />;
+    if (transactions.length <= 0)
+      return (
+        <div className="h-full flex flex-col gap-2">
+          <LoadingSkeleton itemCount={10} className="!h-[56px]" />
+        </div>
+      );
 
     const txCards = transactions.map((tx) => (
       <div key={tx.hash} className="card">
-        <div className="flex items-center gap-6 w-1/3">
+        <div className="flex items-center gap-2">
           <MdOutlineReceiptLong className="text-white2 h-8 w-8 min-h-8 min-w-8" />
-          <div className="flex h-full gap-1 items-end">
+          <div className="flex h-full items-end justify-between gap-1 !min-w-[120px]">
             <Link to={`/tx/${tx.hash}`} className="flex flex-col">
               <div>Hash</div>
               <div className="font-thin text-pastelPink underline flex items-center gap-1">
@@ -43,24 +49,26 @@ export const LatestTx = () => {
             <Copy string={tx.hash} />
           </div>
         </div>
-        <div className="flex flex-col font-light w-1/3">
+        <div className="flex flex-col font-light">
           <div className="flex flex-col">
             <Link
               to={`/block/${blockHashes[tx.blockNumber]}`}
             >{`Block: ${tx.blockNumber}`}</Link>
-            <div className="flex gap-1 items-end">
+            <div className="flex items-end justify-between gap-1 !min-w-[120px]">
               <Link
                 to={`/block/${blockHashes[tx.blockNumber]}`}
-                className="font-thin text-pastelPink underline flex items-center gap-1"
+                className="font-thin text-pastelPink underline flex items-center gap-1 text-nowrap"
               >
-                {blockHashes[tx.blockNumber]
-                  ? `${blockHashes[tx.blockNumber].slice(
-                      0,
-                      5
-                    )}.............${blockHashes[tx.blockNumber].slice(
-                      blockHashes[tx.blockNumber].length - 5
-                    )}`
-                  : "Loading block hash..."}
+                {blockHashes[tx.blockNumber] ? (
+                  `${blockHashes[tx.blockNumber].slice(
+                    0,
+                    5
+                  )}.......${blockHashes[tx.blockNumber].slice(
+                    blockHashes[tx.blockNumber].length - 5
+                  )}`
+                ) : (
+                  <LoadingCard className={`!h-[20px] !w-[100px]`} />
+                )}
               </Link>
               <Copy string={blockHashes[tx.blockNumber]} />
             </div>
@@ -101,7 +109,7 @@ export const LatestTx = () => {
   }, []);
 
   return (
-    <div className=" h-full w-1/2 secondary-box !gap-4">
+    <div className=" h-full w-1/2 below-lg:w-full secondary-box !gap-4">
       <h1 className="headerExa pb-3 pl-[15px]">Latest Transactions</h1>
 
       {latestTxList()}

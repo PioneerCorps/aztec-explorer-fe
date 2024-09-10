@@ -17,7 +17,7 @@ export const Copy = ({ string, className = "" }) => {
   return (
     <MdContentCopy
       onClick={handleCopy}
-      className={`text-white mb-[2px] cursor-pointer ${className}`}
+      className={`h-[14px] w-[14px] min-w-[14px] min-h-[14px] text-white mb-[2px] cursor-pointer ${className}`}
     />
   );
 };

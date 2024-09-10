@@ -6,12 +6,13 @@ import { getBlocks } from "../../api/api";
 import { timeSince } from "../common/getTimePassed";
 import LoadingCard from "../common/loadingCard";
 import { Copy } from "../common/copyToClipboard";
+import { LoadingSkeleton } from "../common/loadingSkeleton";
 
 export const LatestBlocks = () => {
   const [blocks, setBlocks] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-
+  console.log("blocks", blocks);
   // Effect to fetch the last 10 blocks
   useEffect(() => {
     const fetchLastTenBlocks = async () => {
@@ -33,16 +34,21 @@ export const LatestBlocks = () => {
   }, []);
 
   const blockData = () => {
-    if (blocks.length <= 0) return <LoadingCard />;
+    if (blocks.length <= 0)
+      return (
+        <div className="h-full flex flex-col gap-2">
+          <LoadingSkeleton itemCount={10} className="!h-[56px]" />
+        </div>
+      );
     const blockCards = blocks.map((block) => {
       return (
-        <div key={block.hash} className="card">
-          <div className="flex items-center gap-6 w-1/3">
+        <div key={block.hash} className="card ">
+          <div className="flex items-center gap-2 ">
             <BlockIcon
               className="text-white1 h-8 w-8 min-w-8 min-h-8
             "
             />
-            <div className="flex items-end gap-1">
+            <div className="flex items-end justify-between gap-1 !min-w-[120px]">
               <div className="flex flex-col">
                 <Link to={`/block/${block.hash}`}>{block.number}</Link>
                 <Link
@@ -57,8 +63,8 @@ export const LatestBlocks = () => {
               <Copy string={block.hash} />
             </div>
           </div>
-          <div className="flex items-end gap-1">
-            <div className="flex flex-col font-light">
+          <div className="flex items-end justify-between gap-1 !min-w-[105px]">
+            <div className="flex flex-col font-light ">
               <div className="flex gap-1 ">Builder:</div>
               <div className="flex gap-1 ">
                 <Link
@@ -74,9 +80,12 @@ export const LatestBlocks = () => {
             </div>
             <Copy string={block.feeRecipient} />
           </div>
-          <div className="button-orange text-xs min-w-[115px]">
+          <Link
+            to={`/block/${block.hash}`}
+            className="button-orange text-xs text-nowrap !min-w-[120px]"
+          >
             {timeSince(block.timestamp)} ago
-          </div>
+          </Link>
         </div>
       );
     });
@@ -86,7 +95,7 @@ export const LatestBlocks = () => {
     );
   };
   return (
-    <div className=" h-full primary-box w-1/2 !gap-4">
+    <div className=" h-full primary-box w-1/2 below-lg:w-full !gap-4">
       <h1 className="headerExa pb-3 pl-[15px]">Latest Blocks</h1>
       {blockData()}
       <Link

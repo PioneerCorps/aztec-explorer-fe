@@ -4,13 +4,25 @@ import { timeSince } from "../common/getTimePassed";
 export const BlockTable = ({ blocks, loading, error }) => {
   const renderFields = () => {
     return (
-      <div className="flex px-[16px] pb-6 font-medium justify-between gap-5">
-        <div className="w-[18%]">Hash</div>
-        <div className="w-[18%]">Block Number</div>
-        <div className="w-[18%]">Age</div>
-        <div className="w-[10%]">Tx Count</div>
-        <div className="w-[18%]">Fee Recipient</div>
-        <div className="w-[10%]">Fee</div>
+      <div className="flex px-[16px] pb-6 font-medium justify-between gap-5 below-lg:text-xs">
+        <div className="w-[18%] below-lg:text-center flex items-center">
+          Hash
+        </div>
+        <div className="w-[18%] below-lg:text-center flex items-center">
+          Block Number
+        </div>
+        <div className="w-[18%] below-lg:text-center flex items-center">
+          Age
+        </div>
+        <div className="w-[10%] below-lg:text-center flex items-center">
+          Tx Count
+        </div>
+        <div className="w-[18%] below-lg:text-center flex items-center">
+          Fee Recipient
+        </div>
+        <div className="w-[10%] below-lg:text-center flex items-center">
+          Fee
+        </div>
       </div>
     );
   };
@@ -20,7 +32,7 @@ export const BlockTable = ({ blocks, loading, error }) => {
         <div key={Math.random()} className="card font-light !text-xs">
           <Link
             to={`/block/${block.hash}`}
-            className="w-[18%] underline text-pastelPink"
+            className="w-[18%] underline text-pastelPink overflow-hidden text-ellipsis"
           >
             {` ${block.hash.slice(0, 7)}..........${block.hash.slice(
               block.hash.length - 9
@@ -33,15 +45,15 @@ export const BlockTable = ({ blocks, loading, error }) => {
           </div>
           <div className="w-[18%]">{timeSince(block.timestamp)}</div>
           <div className="w-[10%]">{block.txCount}</div>
-          <div className="w-[18%] underline text-pastelPink">
+          <div className="w-[18%] underline text-pastelPink overflow-hidden text-ellipsis">
             {` ${block.feeRecipient.slice(
               0,
               7
             )}..........${block.feeRecipient.slice(
-              block.feeRecipient.length - 9
+              block.feeRecipient.length - 6
             )}`}
           </div>
-          <div className="w-[10%] button-orange !max-w-none">
+          <div className="w-[10%] button-orange !max-w-none ">
             {block.totalFees}
           </div>
         </div>

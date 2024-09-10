@@ -33,7 +33,12 @@ export default {
       boxShadow: {
         "box-shadow-md": "0px 2px 7px 3px rgba(0, 0, 0, 0.3)",
       },
-      screens: {},
+
+      screens: {
+        "below-lg": { max: "1210px" },
+        "below-mobile": { max: "715px" },
+        "above-2k": { min: "2561px" },
+      },
       keyframes: {
         shimmer: {
           "0%": { transform: "translateX(-100%)" },

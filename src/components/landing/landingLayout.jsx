@@ -7,7 +7,7 @@ export const Landing = () => {
     <div className="relative w-screen ">
       <div className="flex flex-col w-full  ">
         <Main />
-        <div className="flex  gap-11 py-[44px] px-[125px] w-full">
+        <div className="flex justify-center items-center  gap-[2vw] py-[44px] px-[6.5vw] w-full below-lg:flex-col">
           <LatestBlocks />
           <LatestTx />
         </div>

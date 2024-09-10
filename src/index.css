@@ -47,15 +47,16 @@ img {
   height: 100%;
   object-fit: contain;
 }
+
 .main {
-  background-image: url("./assets/enhanced.png");
+  background-image: url("./assets/enhanced.webp");
   background-position: bottom;
   background-size: cover;
   background-repeat: no-repeat;
   background-origin: content-box;
 }
 .header {
-  background-image: url("./assets/enhanced.png");
+  background-image: url("./assets/enhanced.webp");
   background-position: bottom;
   background-position-y: 78%;
   background-size: cover;
@@ -79,7 +80,7 @@ img {
   @apply h-full flex  items-center justify-center rounded-xl bg-purpleOp15  text-white duration-300 font-extralight hover:bg-pastelGreen disabled:cursor-not-allowed;
 }
 .input {
-  @apply w-full  bg-white px-[10px] py-1 text-sm text-black  border border-blackOp rounded-xl outline-none  duration-300 placeholder:opacity-65 placeholder:font-extralight focus:outline-none disabled:cursor-not-allowed;
+  @apply w-full bg-white px-[10px] py-1 text-sm text-gray-700 font-light  border border-blackOp rounded-xl outline-none  duration-300 placeholder:opacity-65 placeholder:font-extralight focus:outline-none disabled:cursor-not-allowed caret-pastelPurple;
 }
 .card {
   @apply flex justify-between items-center gap-5 w-full  bg-bgDark3 px-[15px] py-[7px]  border border-blackOp rounded-2xl text-sm shadow-box-shadow-md;
@@ -92,6 +93,9 @@ img {
   @apply tracking-[0.18em] font-bold text-xl;
 }
 
+.text-shadow {
+  text-shadow: 2px 5px 1px rgba(0, 0, 0, 0.489);
+}
 .radial-grad {
   background: rgb(34, 16, 58);
   background: -moz-linear-gradient(

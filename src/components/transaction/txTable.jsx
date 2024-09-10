@@ -1,15 +1,24 @@
 import { Link } from "react-router-dom";
 import LoadingCard from "../common/loadingCard";
+import { timeSince } from "../common/getTimePassed";
+import { Copy } from "../common/copyToClipboard";
 
-export const TxTable = ({ transactions, loading, error }) => {
+export const TxTable = ({
+  transactions,
+  loading,
+  error,
+  loaderLength = 10,
+}) => {
   const renderFields = () => (
-    <div className="flex px-[16px] pb-2 font-medium justify-between gap-5 text-sm ">
-      <div className="w-[22%]">Hash</div>
-      <div className="w-[10%]">Block</div>
-      <div className="w-[18%]">Age</div>
-      <div className="w-[10%]">Index</div>
-      <div className="w-[22%]">Nullifier </div>
-      <div className="w-[10%]">Fee</div>
+    <div className="flex px-[16px] pb-2 font-medium justify-between gap-5 text-sm below-lg:text-xs ">
+      <div className="w-[22%] elow-lg:text-center flex items-center">Hash</div>
+      <div className="w-[10%] elow-lg:text-center flex items-center">Block</div>
+      <div className="w-[18%] elow-lg:text-center flex items-center">Age</div>
+      <div className="w-[10%] elow-lg:text-center flex items-center">Index</div>
+      <div className="w-[22%] elow-lg:text-center flex items-center">
+        Nullifier
+      </div>
+      <div className="w-[10%] elow-lg:text-center flex items-center">Fee</div>
     </div>
   );
 
@@ -18,20 +27,22 @@ export const TxTable = ({ transactions, loading, error }) => {
       <div key={Math.random()} className="card font-light !text-xs">
         <Link
           to={`/tx/${tx.hash}`}
-          className="w-[22%] underline text-pastelPink"
+          className="w-[22%] underline text-pastelPink flex gap-1 overflow-hidden text-ellipsis"
         >
           {` ${tx.hash.slice(0, 7)}..........${tx.hash.slice(
             tx.hash.length - 9
           )}`}
+          <Copy string={tx.hash} />
         </Link>
+
         <div className="w-[10%]">
           <div className="button-purple w-min px-5 py-2 h-full">
             {tx.blockNumber}
           </div>
         </div>
-        <div className="w-[18%]">Timestamp</div>
+        <div className="w-[18%]">{`${timeSince(tx.timestamp)}`}</div>
         <div className="w-[10%]">{tx.index}</div>
-        <div className="w-[22%] underline text-pastelPink">
+        <div className="w-[22%] underline text-pastelPink overflow-hidden text-ellipsis">
           {` ${tx.hash.slice(0, 5)}..........${tx.hash.slice(
             tx.hash.length - 7
           )}`}
@@ -51,7 +62,7 @@ export const TxTable = ({ transactions, loading, error }) => {
   };
 
   const loadingSkeleton = () => {
-    const itemCount = transactions?.length ? transactions.length : 10;
+    const itemCount = transactions?.length ? transactions.length : loaderLength;
 
     return (
       <>

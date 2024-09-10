@@ -1,9 +1,7 @@
-// api.js
 import axios from "axios";
 
-const BASE_URL = "https://api.aztecexplorer.xyz"; // Replace with your API's base URL
+const BASE_URL = "https://api.aztecexplorer.xyz";
 
-// Block-related functions
 export const getBlockByNumber = async (blockNumber) => {
   try {
     const response = await axios.get(
@@ -41,7 +39,6 @@ export const getBlocks = async (page, limit) => {
   }
 };
 
-// Transaction-related functions
 export const getTransactionsByBlockNumber = async (blockNumber) => {
   try {
     const response = await axios.get(
@@ -74,6 +71,24 @@ export const getTransactions = async (page, limit) => {
         limit,
       },
     });
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching transactions:", error);
+    throw error;
+  }
+};
+export const getLatestBlockNumber = async () => {
+  try {
+    const response = await axios.get(`${BASE_URL}/blocks/count`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching transactions:", error);
+    throw error;
+  }
+};
+export const getTotalTxCount = async () => {
+  try {
+    const response = await axios.get(`${BASE_URL}/transactions/count`);
     return response.data;
   } catch (error) {
     console.error("Error fetching transactions:", error);

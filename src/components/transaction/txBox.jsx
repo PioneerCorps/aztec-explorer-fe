@@ -2,7 +2,8 @@ import { SearchBar } from "../landing/searchBar";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { getBlockByNumber, getTransactionByHash } from "../../api/api";
-
+import LoadingCard from "../common/loadingCard";
+import { Copy } from "../common/copyToClipboard";
 export const TxBox = () => {
   const { hash } = useParams();
 
@@ -17,10 +18,10 @@ export const TxBox = () => {
     index: "Index",
     transactionFee: "Transaction Fee",
     noteHashes: "Note Hashes",
-    unencryptedLogs: "Unencrypted Logs",
     l2ToL1Msgs: "L2 to L1 Messages",
     publicDataWrites: "Public Data Writes",
     nullifiers: "Nullifiers",
+    uneencryptedLogs: "Unencrypted Logs",
   };
 
   useEffect(() => {
@@ -54,9 +55,37 @@ export const TxBox = () => {
 
     const infoFields = Object.keys(fieldLabels).map((field) => {
       if (field === "nullifiers") {
-        const nullifiersValue = transaction.nullifiers
-          ? transaction.nullifiers.split(",").join("\n")
-          : "";
+        return (
+          <div className="flex gap-24 justify-between text-sm" key={field}>
+            <div className="min-w-[250px] font-light text-nowrap text-white1">
+              {fieldLabels[field]}:
+            </div>
+            <div className="w-full">
+              <textarea
+                className="w-[70%] h-32 p-3 font-light border border-bgLight1 bg-bgLight1OP rounded-lg resize-none leading-7 text-white1 font-monospace focus:outline-none"
+                value={
+                  transaction[field]
+                    ? transaction[field]
+                        .split(",")
+                        .map((item, index) => `${index + 1}: ${item.trim()}`)
+                        .join("\n") // Ensure each item is placed on a new line
+                    : ""
+                }
+                readOnly
+              />
+            </div>
+          </div>
+        );
+      }
+
+      if (field === "uneencryptedLogs") {
+        console.log(transaction[field]);
+        const logObj = JSON.parse(
+          transaction[field] ? transaction[field] : "{}"
+        );
+
+        // Format the logObj with 2-space indentation
+        const formattedLogs = JSON.stringify(logObj, null, 2);
 
         return (
           <div className="flex gap-24 justify-between text-sm" key={field}>
@@ -65,15 +94,14 @@ export const TxBox = () => {
             </div>
             <div className="w-full">
               <textarea
-                className="w-[70%] h-32 p-3 font-light  border border-bgLight1 bg-bgLight1OP rounded-lg resize-none leading-7 text-white1 font-monospace "
-                value={nullifiersValue}
+                className="w-[70%] h-32 p-3 font-light border border-bgLight1 bg-bgLight1OP rounded-lg resize-none leading-7 text-white1 font-monospace focus:outline-none"
+                value={formattedLogs} // Set the formatted JSON as the value
                 readOnly
               />
             </div>
           </div>
         );
       }
-
       if (field === "publicDataWrites") {
         return (
           <div className="flex gap-24 justify-between text-sm" key={field}>
@@ -82,21 +110,41 @@ export const TxBox = () => {
             </div>
             <div className="w-full">
               <textarea
-                className="w-[70%] h-32 p-3 font-light  border border-bgLight1 bg-bgLight1OP rounded-lg resize-none leading-7 text-white1 font-monospace "
-                value={transaction[field]}
+                className="w-[70%] h-32 p-3 font-light border border-bgLight1 bg-bgLight1OP rounded-lg resize-none leading-7 text-white1 font-monospace focus:outline-none"
+                value={
+                  transaction[field]
+                    ? transaction[field]
+                        .split(",")
+                        .map((item, index) => `${index + 1}: ${item.trim()}`)
+                        .join("\n")
+                    : ""
+                }
                 readOnly
               />
             </div>
           </div>
         );
       }
+
       return (
         <div className="flex gap-24 justify-between text-sm" key={field}>
           <div className="min-w-[250px] font-light text-nowrap text-white1">
             {fieldLabels[field]}:
           </div>
           <div className="w-full overflow-hidden text-ellipsis font-extralight">
-            {transaction[field]}
+            {loading ? (
+              <LoadingCard className={"!h-[20px] !w-1/4 "} />
+            ) : (
+              <div className="flex items-center gap-2">
+                {transaction[field]}
+                {field == "hash" ? (
+                  <Copy
+                    className="!mb-0 !text-white1"
+                    string={transaction[field]}
+                  />
+                ) : null}
+              </div>
+            )}
           </div>
         </div>
       );

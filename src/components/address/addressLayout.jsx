@@ -70,7 +70,7 @@ export const Address = () => {
   };
 
   return (
-    <div className="px-[82px] py-[73px]">
+    <div className="px-[6.5vw] py-[73px]">
       <div className="primary-box">
         <div className="flex items-center">
           <div className="flex-col gap-2 w-full pb-6">
