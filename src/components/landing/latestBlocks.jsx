@@ -42,13 +42,16 @@ export const LatestBlocks = () => {
       );
     const blockCards = blocks.map((block) => {
       return (
-        <div key={block.hash} className="card ">
-          <div className="flex items-center gap-2 ">
+        <div
+          key={block.hash}
+          className="card below-mobile:flex-col below-mobile:gap-3 below-mobile:py-5 "
+        >
+          <div className="flex items-center gap-3 below-mobile:w-full below-mobile:border-b below-mobile:border-bgLight1 below-mobile:pb-3">
             <BlockIcon
-              className="text-white1 h-8 w-8 min-w-8 min-h-8
+              className="text-white1 h-7 w-7 min-w-7 min-h-7 below-mobile:hidden
             "
             />
-            <div className="flex items-end justify-between gap-1 !min-w-[120px]">
+            <div className="flex items-end justify-between gap-1 !min-w-[120px]  ">
               <div className="flex flex-col">
                 <Link to={`/block/${block.hash}`}>{block.number}</Link>
                 <Link
@@ -63,7 +66,7 @@ export const LatestBlocks = () => {
               <Copy string={block.hash} />
             </div>
           </div>
-          <div className="flex items-end justify-between gap-1 !min-w-[105px]">
+          <div className="flex items-end justify-between gap-1 !min-w-[105px] below-mobile:w-full below-mobile:border-b below-mobile:border-bgLight1 below-mobile:pb-3 below-lg:justify-normal">
             <div className="flex flex-col font-light ">
               <div className="flex gap-1 ">Builder:</div>
               <div className="flex gap-1 ">
@@ -82,7 +85,7 @@ export const LatestBlocks = () => {
           </div>
           <Link
             to={`/block/${block.hash}`}
-            className="button-orange text-xs text-nowrap !min-w-[120px]"
+            className="button-orange text-xs text-nowrap !min-w-[120px] "
           >
             {timeSince(block.timestamp)} ago
           </Link>

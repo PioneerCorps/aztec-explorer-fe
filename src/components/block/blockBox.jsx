@@ -35,11 +35,11 @@ export const BlockBox = () => {
 
     const infoFields = Object.keys(fieldLabels).map((field) => {
       return (
-        <div className=" flex gap-24 justify-between text-sm ">
-          <div className="min-w-[250px] font-light text-nowrap text-white1">
+        <div className=" flex below-lg:flex-col below-lg:gap-2 gap-24 justify-between text-sm below-lg:border-b below-lg:border-bgLight1 below-lg:pb-2 ">
+          <div className="min-w-[250px] below-lg:min-w-[110px] font-light text-nowrap  text-white1">
             {fieldLabels[field]}:
           </div>
-          <div className="w-full overflow-hidden text-ellipsis font-extralight flex items-center  gap-2">
+          <div className="w-full overflow-hidden text-ellipsis font-extralight flex items-center gap-2  below-mobile:break-all">
             {!block[field] ? (
               <LoadingCard className={"!h-[20px] !w-1/4"} />
             ) : field == "timestamp" ? (
@@ -60,7 +60,9 @@ export const BlockBox = () => {
 
     return (
       <div className="flex flex-col">
-        <div className="secondary-box !gap-8">{infoFields}</div>
+        <div className="secondary-box !gap-8 below-lg:!gap-5 ">
+          {infoFields}
+        </div>
       </div>
     );
   };
@@ -90,20 +92,23 @@ export const BlockBox = () => {
   }, []);
 
   return (
-    <div className="primary-box">
-      <div className="flex justify-between items-center">
-        <div className="flex flex-col w-full gap-2 pb-4">
-          <h1 className="headerExa w-full !text-2xl">{`Block #${
-            block.number ? block.number : ""
-          }`}</h1>
-          <div className="text-pastelPink font-extralight text-sm">{`${
-            block.txCount ? block.txCount : ""
-          } Transactions found`}</div>
+    <>
+      <SearchBar className="hidden below-mobile:flex" />
+      <div className="primary-box below-mobile:mt-8">
+        <div className="flex justify-between items-center">
+          <div className="flex flex-col w-full gap-2 pb-4">
+            <h1 className="headerExa w-full !text-2xl">{`Block #${
+              block.number ? block.number : ""
+            }`}</h1>
+            <div className="text-pastelPink font-extralight text-sm">{`${
+              block.txCount ? block.txCount : ""
+            } Transactions found`}</div>
+          </div>
+          <SearchBar className={"below-mobile:hidden"} />
         </div>
-        <SearchBar />
+        {renderBlockInfo()}
+        <TxTable transactions={transactions} loading={loading} error={error} />
       </div>
-      {renderBlockInfo()}
-      <TxTable transactions={transactions} loading={loading} error={error} />
-    </div>
+    </>
   );
 };

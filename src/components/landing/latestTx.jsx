@@ -34,9 +34,12 @@ export const LatestTx = () => {
       );
 
     const txCards = transactions.map((tx) => (
-      <div key={tx.hash} className="card">
-        <div className="flex items-center gap-2">
-          <MdOutlineReceiptLong className="text-white2 h-8 w-8 min-h-8 min-w-8" />
+      <div
+        key={tx.hash}
+        className="card below-mobile:flex-col below-mobile:gap-3 below-mobile:py-5"
+      >
+        <div className="flex items-center gap-3">
+          <MdOutlineReceiptLong className="text-white2 h-7 w-7 min-h-7 min-w-7 below-mobile:hidden" />
           <div className="flex h-full items-end justify-between gap-1 !min-w-[120px]">
             <Link to={`/tx/${tx.hash}`} className="flex flex-col">
               <div>Hash</div>

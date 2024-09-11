@@ -1,7 +1,7 @@
 import { MdSearch } from "react-icons/md";
-export const SearchBar = () => {
+export const SearchBar = ({ className }) => {
   return (
-    <div className="flex justify-start relative w-full z-50">
+    <div className={`flex justify-start relative w-full z-50 ${className}`}>
       <div className="input !w-min  !px-3 !rounded-r-none !border-r-0 flex items-center justify-center  ">
         <MdSearch className="h-6 w-6 fill-bgLight1OP " />
       </div>

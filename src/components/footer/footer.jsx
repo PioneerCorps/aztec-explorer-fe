@@ -1,15 +1,15 @@
 import logo from "../../assets/logo.webp";
 export const Footer = () => {
   return (
-    <div className="bg-bgDark2 flex justify-between w-full py-[65px] px-[6.5vw] !text-xs ">
+    <div className="bg-bgDark2 flex justify-between w-full py-[65px] px-[6.5vw] !text-xs below-mobile:gap-3 ">
       <div className="flex items-center justify-center text-white gap-3">
         <img className=" h-[60px] w-[60px]" src={logo} />
-        <div className="headerExa">
+        <div className="headerExa below-mobile:hidden">
           Aztec Explorer
           <div className="text-xs font-thin tracking-wide">PioneerLabs</div>
         </div>
       </div>
-      <div className="flex justify-between items-center w-1/2 text-white font-extralight">
+      <div className="flex justify-between items-center w-1/2 below-mobile:w-full text-white font-extralight">
         <div className=" flex flex-col gap-2 h-full">
           <h1 className="text-bgLight2 text-lg">About Us</h1>
           <p className="hover:underline cursor-pointer">Contact Us</p>
