@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import React from "react";
 import {
   MdOutlineDarkMode,
@@ -11,6 +11,8 @@ import { Link, useLocation } from "react-router-dom";
 import logo from "../../assets/logo.webp";
 export const Header = () => {
   const [type, setType] = useState("main");
+  const [isPanelOpen, setIsPanelOpen] = useState(false);
+  const sideBarRef = useRef(null);
   const tabs = ["Network", "Tokens", "Developers", "More"];
   const path = useLocation();
   const pathname = path.pathname.replace(/\//gi, "");
@@ -29,20 +31,31 @@ export const Header = () => {
   useEffect(() => {
     if (!pathname) {
       type === "main" ? "" : setType("main");
-    }
-    //ADD MOBILE HEADER
-    else {
+    } else {
       type == "alt" ? "" : setType("alt");
     }
   }, [type, pathname]);
 
+  useEffect(() => {
+    const handleOutsideClick = (event) => {
+      if (sideBarRef.current && !sideBarRef.current.contains(event.target)) {
+        setIsPanelOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleOutsideClick);
+
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+    };
+  }, []);
   const mobileHeader = () => {
     return (
       <div
         className={`
           ${type == "main" && "absolute"}
           ${type == "alt" && "header"}
-           h-[100px] py-5 flex justify-between items-center w-full z-50  text-sm px-[6.5vw] duration-300`}
+           h-[100px] py-5 flex justify-between items-center w-full z-50  text-sm px-[6.5vw]`}
       >
         <Link to="/">
           <img
@@ -51,7 +64,37 @@ export const Header = () => {
           />
         </Link>
         <div className="cursor-pointer">
-          <MdMenu className="w-12 h-12 min-w-12 min-h-12 text-white " />
+          <MdMenu
+            onClick={() => setIsPanelOpen(true)}
+            className="w-12 h-12 min-w-12 min-h-12 text-white "
+          />
+        </div>
+      </div>
+    );
+  };
+
+  const mobileSidePanel = () => {
+    return (
+      <div
+        ref={sideBarRef}
+        className={`
+          ${!isPanelOpen && "!translate-x-full"} 
+          fixed top-0 right-0  bg-bgDark2 w-[60%] h-full z-[100] px-5 py-10 flex flex-col justify-between duration-300`}
+      >
+        <div className="flex flex-col gap-7 text-xl text-white cursor-pointer">
+          <div className=" border-b pb-3 border-bgLight1">Network</div>
+          <div className=" border-b pb-3 border-bgLight1">Tokens</div>
+          <div className=" border-b pb-3 border-bgLight1">Developers</div>
+          <div className=" border-b pb-3 border-bgLight1">More</div>
+        </div>
+        <div className="flex gap-2">
+          <div className="button-orange border border-purpleOp50 !rounded-[8px] w-full !p-2">
+            <MdOutlinePersonOutline className=" !p-0 min-w-4 min-h-4 w-4 h-4" />
+            Profile
+          </div>
+          <div className="button-orange border border-purpleOp50 flex items-center">
+            <MdOutlineDarkMode className="  min-w-4 min-h-4 w-4 h-4" />
+          </div>
         </div>
       </div>
     );
@@ -63,7 +106,7 @@ export const Header = () => {
         className={` 
         ${type == "main" && "top-[30px] h-[60px] absolute"}
         ${type == "alt" && "header h-[100px] py-5"}
-        flex justify-between items-center w-full z-50  text-sm pl-[6.5vw] duration-300  `}
+        flex justify-between items-center w-full z-50  text-sm pl-[6.5vw]`}
       >
         <Link className="w-1/3" to="/">
           <img
@@ -100,6 +143,7 @@ export const Header = () => {
     <>
       <div className="hidden below-mobile:block">{mobileHeader()}</div>
       <div className="below-mobile:hidden">{desktopHeader()}</div>
+      {mobileSidePanel()}
     </>
   );
 };

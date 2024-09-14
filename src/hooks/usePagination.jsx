@@ -10,7 +10,7 @@ export const usePagination = (maxItems) => {
   const maxPages = Math.ceil(maxItems / limit);
   const renderPaginationButtons = () => {
     return (
-      <div className="flex  pt-2 w-full justify-between text-xs font-light">
+      <div className="flex  pt-2 w-full justify-between text-xs font-light below-mobile:flex-col-reverse below-mobile:gap-3 below-mobile:justify-end below-mobile:items-end">
         <div className="flex gap-2">
           <div className="bg-pastelPurple outline-2 outline-purpleOp50 outline  flex items-center justify-center text-white px-3 h-7 rounded-lg">
             Show rows :
@@ -52,7 +52,9 @@ export const usePagination = (maxItems) => {
             onClick={() => setPage(page - 1 <= 0 ? 1 : page - 1)}
             className="bg-pastelPurple outline-2 outline-purpleOp50 outline flex items-center justify-center text-white w-7 h-7 rounded-lg cursor-pointer"
           >{`<`}</div>
-          <div className="bg-pastelPurple outline-2 outline-purpleOp50 outline flex items-center justify-center text-white px-2 h-7 rounded-lg">{`${page} of ${maxPages}`}</div>
+          <div className="bg-pastelPurple outline-2 outline-purpleOp50 outline flex items-center justify-center text-white px-2 h-7 rounded-lg">{`${page} of ${
+            maxPages ? maxPages : ""
+          }`}</div>
           <div
             onClick={() => {
               page + 1 <= maxPages ? setPage(page + 1) : null;

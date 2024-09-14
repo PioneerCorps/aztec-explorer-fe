@@ -18,7 +18,7 @@ import { BlockList } from "./components/block/blockList";
 import { TransactionList } from "./components/transaction/transactionList";
 function App() {
   return (
-    <div className="bg-bgDark1 w-screen">
+    <div className="bg-bgDark1 w-screen relative overflow-x-hidden ">
       <Header />
       <Routes>
         <Route path="/" element={<Landing />} />

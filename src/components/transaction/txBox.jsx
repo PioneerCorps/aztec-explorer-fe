@@ -56,19 +56,22 @@ export const TxBox = () => {
     const infoFields = Object.keys(fieldLabels).map((field) => {
       if (field === "nullifiers") {
         return (
-          <div className="flex gap-24 justify-between text-sm" key={field}>
+          <div
+            className="flex gap-24 justify-between text-sm below-lg:flex-col below-lg:gap-3 below-lg:border-b below-lg:border-bgLight1 below-lg:pb-2"
+            key={field}
+          >
             <div className="min-w-[250px] font-light text-nowrap text-white1">
               {fieldLabels[field]}:
             </div>
             <div className="w-full">
               <textarea
-                className="w-[70%] h-32 p-3 font-light border border-bgLight1 bg-bgLight1OP rounded-lg resize-none leading-7 text-white1 font-monospace focus:outline-none"
+                className="w-[70%] h-32 p-3 font-light border border-bgLight1 bg-bgLight1OP rounded-lg resize-none leading-7 text-white1 font-monospace focus:outline-none below-lg:w-full"
                 value={
                   transaction[field]
                     ? transaction[field]
                         .split(",")
                         .map((item, index) => `${index + 1}: ${item.trim()}`)
-                        .join("\n") // Ensure each item is placed on a new line
+                        .join("\n")
                     : ""
                 }
                 readOnly
@@ -84,18 +87,20 @@ export const TxBox = () => {
           transaction[field] ? transaction[field] : "{}"
         );
 
-        // Format the logObj with 2-space indentation
         const formattedLogs = JSON.stringify(logObj, null, 2);
 
         return (
-          <div className="flex gap-24 justify-between text-sm" key={field}>
+          <div
+            className="flex gap-24 justify-between text-sm below-lg:flex-col below-lg:gap-3 below-lg:border-b below-lg:border-bgLight1 below-lg:pb-2"
+            key={field}
+          >
             <div className="min-w-[250px] font-light text-nowrap text-white1">
               {fieldLabels[field]}:
             </div>
             <div className="w-full">
               <textarea
-                className="w-[70%] h-32 p-3 font-light border border-bgLight1 bg-bgLight1OP rounded-lg resize-none leading-7 text-white1 font-monospace focus:outline-none"
-                value={formattedLogs} // Set the formatted JSON as the value
+                className="w-[70%] h-32 p-3 font-light border border-bgLight1 bg-bgLight1OP rounded-lg resize-none leading-7 text-white1 font-monospace focus:outline-none below-lg:w-full below-lg:gap-3"
+                value={formattedLogs}
                 readOnly
               />
             </div>
@@ -104,13 +109,16 @@ export const TxBox = () => {
       }
       if (field === "publicDataWrites") {
         return (
-          <div className="flex gap-24 justify-between text-sm" key={field}>
+          <div
+            className="flex gap-24 justify-between text-sm below-lg:flex-col below-lg:gap-3 below-lg:border-b below-lg:border-bgLight1 below-lg:pb-2"
+            key={field}
+          >
             <div className="min-w-[250px] font-light text-nowrap text-white1">
               {fieldLabels[field]}:
             </div>
             <div className="w-full">
               <textarea
-                className="w-[70%] h-32 p-3 font-light border border-bgLight1 bg-bgLight1OP rounded-lg resize-none leading-7 text-white1 font-monospace focus:outline-none"
+                className="w-[70%] h-32 p-3 font-light border border-bgLight1 bg-bgLight1OP rounded-lg resize-none leading-7 text-white1 font-monospace focus:outline-none below-lg:w-full"
                 value={
                   transaction[field]
                     ? transaction[field]
@@ -127,11 +135,14 @@ export const TxBox = () => {
       }
 
       return (
-        <div className="flex gap-24 justify-between text-sm" key={field}>
+        <div
+          className="flex gap-24 justify-between text-sm below-lg:flex-col below-lg:gap-2 below-lg:border-b below-lg:border-bgLight1 below-lg:pb-2 "
+          key={field}
+        >
           <div className="min-w-[250px] font-light text-nowrap text-white1">
             {fieldLabels[field]}:
           </div>
-          <div className="w-full overflow-hidden text-ellipsis font-extralight">
+          <div className="w-full overflow-hidden text-ellipsis font-extralight below-mobile:break-all">
             {loading ? (
               <LoadingCard className={"!h-[20px] !w-1/4 "} />
             ) : (
@@ -158,13 +169,16 @@ export const TxBox = () => {
   };
 
   return (
-    <div className="primary-box">
-      <div className="flex justify-between items-center">
-        <h1 className="headerExa w-full">Transaction Detail</h1>
+    <>
+      <SearchBar className="hidden below-lg:flex" />
+      <div className="primary-box below-lg:mt-8">
+        <div className="flex justify-between items-center">
+          <h1 className="headerExa w-full">Transaction Detail</h1>
 
-        <SearchBar />
+          <SearchBar className={"below-lg:hidden"} />
+        </div>
+        {renderTransactionInfo()}
       </div>
-      {renderTransactionInfo()}
-    </div>
+    </>
   );
 };

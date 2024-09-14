@@ -1,44 +1,54 @@
 import { Link } from "react-router-dom";
 import LoadingCard from "../common/loadingCard";
 import { timeSince } from "../common/getTimePassed";
+import { Copy } from "../common/copyToClipboard";
 export const BlockTable = ({ blocks, loading, error }) => {
   const renderFields = () => {
     return (
-      <div className="flex px-[16px] pb-6 font-medium justify-between gap-5 below-lg:text-xs">
-        <div className="w-[18%] below-lg:text-center flex items-center">
-          Hash
+      <>
+        <h1 className="!hidden below-mobile:flex">Blocks</h1>
+        <div className="flex px-[16px] pb-6 font-medium justify-between gap-0 below-lg:text-xs below-mobile:hidden">
+          <div className="w-[21%] below-lg:text-center flex items-center">
+            Hash
+          </div>
+          <div className="w-[15%] below-lg:text-center flex items-center">
+            Number
+          </div>
+          <div className="w-[18%] below-lg:text-center flex items-center">
+            Age
+          </div>
+          <div className="w-[10%] below-lg:text-center flex items-center">
+            Tx Count
+          </div>
+          <div className="w-[18%] below-lg:text-center flex items-center">
+            Fee Recipient
+          </div>
+          <div className="w-[10%] below-lg:text-center flex items-center">
+            Fee
+          </div>
         </div>
-        <div className="w-[18%] below-lg:text-center flex items-center">
-          Block Number
-        </div>
-        <div className="w-[18%] below-lg:text-center flex items-center">
-          Age
-        </div>
-        <div className="w-[10%] below-lg:text-center flex items-center">
-          Tx Count
-        </div>
-        <div className="w-[18%] below-lg:text-center flex items-center">
-          Fee Recipient
-        </div>
-        <div className="w-[10%] below-lg:text-center flex items-center">
-          Fee
-        </div>
-      </div>
+      </>
     );
   };
   const renderBlockList = () => {
     const blockCards = blocks.map((block) => {
       return (
-        <div key={Math.random()} className="card font-light !text-xs">
-          <Link
-            to={`/block/${block.hash}`}
-            className="w-[18%] underline text-pastelPink overflow-hidden text-ellipsis"
-          >
-            {` ${block.hash.slice(0, 7)}..........${block.hash.slice(
-              block.hash.length - 9
-            )}`}
-          </Link>
-          <div className="w-[18%]">
+        <div
+          key={Math.random()}
+          className="  below-mobile:!hidden !gap-0 card font-light !text-xs"
+        >
+          <div className="w-[21%] text-pastelPink overflow-hidden text-ellipsis flex gap-1 items-center ">
+            <Link
+              to={`/block/${block.hash}`}
+              className="underline underline-offset-2"
+            >
+              {` ${block.hash.slice(0, 7)}..........${block.hash.slice(
+                block.hash.length - 9
+              )}`}
+            </Link>
+            <Copy string={block.hash} className="!mb-0" />
+          </div>
+          <div className="w-[15%]">
             <div className="button-purple w-min px-5 py-2 h-full">
               {block.number}
             </div>
@@ -53,7 +63,7 @@ export const BlockTable = ({ blocks, loading, error }) => {
               block.feeRecipient.length - 6
             )}`}
           </div>
-          <div className="w-[10%] button-orange !max-w-none ">
+          <div className="w-[10%] button-orange !max-w-none text-[10px] ">
             {block.totalFees}
           </div>
         </div>
@@ -62,6 +72,40 @@ export const BlockTable = ({ blocks, loading, error }) => {
 
     return blockCards;
   };
+  const renderMobileBlockList = () =>
+    blocks.map((block) => (
+      <Link
+        to={`/block/${block.hash}`}
+        key={Math.random()}
+        className="!hidden below-mobile:!flex card font-light !text-xs"
+      >
+        <div className="flex flex-col gap-2">
+          <div className="button-purple w-min px-3 py-2 h-full text-nowrap">
+            Block : {block.number}
+          </div>
+
+          <div className="flex gap-2">
+            <div className="text-white1">Block # :</div>
+            <div className="underline text-pastelPink">
+              {`${block.hash.slice(0, 5)}..........${block.hash.slice(
+                block.hash.length - 7
+              )}`}
+            </div>
+          </div>
+          <div className="flex gap-2">
+            <div className="text-white1">Age :</div>
+            <div className="">{`${timeSince(block.timestamp)}`}</div>
+          </div>
+          <div className="flex gap-2 items-center">
+            <div>Total Fees :</div>
+            <div className=" button-orange !max-w-none !px-1 !py-1 !text-[10px] !rounded-md">
+              {block.totalFees} TST
+            </div>
+          </div>
+        </div>
+      </Link>
+    ));
+
   const errorCard = () => {
     return (
       <div className="primary-box w-full flex items-center justify-center h-[350px]">
@@ -88,7 +132,14 @@ export const BlockTable = ({ blocks, loading, error }) => {
         errorCard()
       ) : (
         <div className="relative flex flex-col gap-[10px]">
-          {loading ? loadingSkeleton() : renderBlockList()}
+          {loading ? (
+            loadingSkeleton()
+          ) : (
+            <>
+              {renderBlockList()}
+              {renderMobileBlockList()}
+            </>
+          )}
         </div>
       )}
     </div>

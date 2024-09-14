@@ -36,9 +36,9 @@ export const LatestTx = () => {
     const txCards = transactions.map((tx) => (
       <div
         key={tx.hash}
-        className="card below-mobile:flex-col below-mobile:gap-3 below-mobile:py-5"
+        className="card below-mobile:flex-col below-mobile:gap-3 below-mobile:py-5 below-mobile:items-start"
       >
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 below-mobile:w-full below-mobile:border-b below-mobile:border-bgLight1 below-mobile:pb-3 ">
           <MdOutlineReceiptLong className="text-white2 h-7 w-7 min-h-7 min-w-7 below-mobile:hidden" />
           <div className="flex h-full items-end justify-between gap-1 !min-w-[120px]">
             <Link to={`/tx/${tx.hash}`} className="flex flex-col">
@@ -52,7 +52,7 @@ export const LatestTx = () => {
             <Copy string={tx.hash} />
           </div>
         </div>
-        <div className="flex flex-col font-light">
+        <div className="flex items-end justify-between gap-1 !min-w-[105px] below-mobile:w-full below-mobile:border-b below-mobile:border-bgLight1 below-mobile:pb-3 below-lg:justify-normal">
           <div className="flex flex-col">
             <Link
               to={`/block/${blockHashes[tx.blockNumber]}`}
@@ -60,7 +60,7 @@ export const LatestTx = () => {
             <div className="flex items-end justify-between gap-1 !min-w-[120px]">
               <Link
                 to={`/block/${blockHashes[tx.blockNumber]}`}
-                className="font-thin text-pastelPink underline flex items-center gap-1 text-nowrap"
+                className="font-thin text-pastelPink underline flex items-center gap-1 text-nowrap "
               >
                 {blockHashes[tx.blockNumber] ? (
                   `${blockHashes[tx.blockNumber].slice(
@@ -78,7 +78,7 @@ export const LatestTx = () => {
           </div>
         </div>
         <div className="button-orange  text-nowrap !max-w-none text-xs ">
-          {tx.transactionFee} AZT
+          {tx.transactionFee} TST
         </div>
       </div>
     ));

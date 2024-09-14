@@ -1,5 +1,4 @@
 import { SearchBar } from "./searchBar";
-import { Header } from "../header/header";
 
 export const Main = () => {
   return (

@@ -93,8 +93,8 @@ export const BlockBox = () => {
 
   return (
     <>
-      <SearchBar className="hidden below-mobile:flex" />
-      <div className="primary-box below-mobile:mt-8">
+      <SearchBar className="hidden below-lg:flex" />
+      <div className="primary-box below-lg:mt-8">
         <div className="flex justify-between items-center">
           <div className="flex flex-col w-full gap-2 pb-4">
             <h1 className="headerExa w-full !text-2xl">{`Block #${
@@ -104,7 +104,7 @@ export const BlockBox = () => {
               block.txCount ? block.txCount : ""
             } Transactions found`}</div>
           </div>
-          <SearchBar className={"below-mobile:hidden"} />
+          <SearchBar className={"below-lg:hidden"} />
         </div>
         {renderBlockInfo()}
         <TxTable transactions={transactions} loading={loading} error={error} />

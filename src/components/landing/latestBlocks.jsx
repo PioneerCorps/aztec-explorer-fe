@@ -44,7 +44,7 @@ export const LatestBlocks = () => {
       return (
         <div
           key={block.hash}
-          className="card below-mobile:flex-col below-mobile:gap-3 below-mobile:py-5 "
+          className="card below-mobile:flex-col below-mobile:gap-3 below-mobile:py-5 below-mobile:items-start"
         >
           <div className="flex items-center gap-3 below-mobile:w-full below-mobile:border-b below-mobile:border-bgLight1 below-mobile:pb-3">
             <BlockIcon
@@ -85,7 +85,7 @@ export const LatestBlocks = () => {
           </div>
           <Link
             to={`/block/${block.hash}`}
-            className="button-orange text-xs text-nowrap !min-w-[120px] "
+            className="button-green text-xs text-nowrap !min-w-[120px] px-4 py-2  "
           >
             {timeSince(block.timestamp)} ago
           </Link>
