@@ -105,7 +105,7 @@ export const Header = () => {
       <div
         className={` 
         ${type == "main" && "top-[30px] h-[60px] absolute"}
-        ${type == "alt" && "header h-[100px] py-5"}
+        ${type == "alt" && "header h-[120px] py-[30px]"}
         flex justify-between items-center w-full z-50  text-sm pl-[6.5vw]`}
       >
         <Link className="w-1/3" to="/">

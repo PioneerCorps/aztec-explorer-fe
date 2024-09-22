@@ -65,7 +65,7 @@ export const TxBox = () => {
             </div>
             <div className="w-full">
               <textarea
-                className="w-[70%] h-32 p-3 font-light border border-bgLight1 bg-bgLight1OP rounded-lg resize-none leading-7 text-white1 font-monospace focus:outline-none below-lg:w-full"
+                className="w-[70%] h-32 p-3 font-light border border-bgLight1 bg-bgLight1OP rounded-lg resize-y leading-7 text-white1 font-monospace focus:outline-none below-lg:w-full "
                 value={
                   transaction[field]
                     ? transaction[field]
@@ -99,7 +99,7 @@ export const TxBox = () => {
             </div>
             <div className="w-full">
               <textarea
-                className="w-[70%] h-32 p-3 font-light border border-bgLight1 bg-bgLight1OP rounded-lg resize-none leading-7 text-white1 font-monospace focus:outline-none below-lg:w-full below-lg:gap-3"
+                className="w-[70%] h-32 p-3 font-light border border-bgLight1 bg-bgLight1OP rounded-lg resize-y leading-7 text-white1 font-monospace focus:outline-none below-lg:w-full below-lg:gap-3"
                 value={formattedLogs}
                 readOnly
               />
@@ -118,7 +118,7 @@ export const TxBox = () => {
             </div>
             <div className="w-full">
               <textarea
-                className="w-[70%] h-32 p-3 font-light border border-bgLight1 bg-bgLight1OP rounded-lg resize-none leading-7 text-white1 font-monospace focus:outline-none below-lg:w-full"
+                className="w-[70%] h-32 p-3 font-light border border-bgLight1 bg-bgLight1OP rounded-lg resize-y leading-7 text-white1 font-monospace focus:outline-none below-lg:w-full overflow-y-scroll "
                 value={
                   transaction[field]
                     ? transaction[field]
@@ -147,7 +147,7 @@ export const TxBox = () => {
               <LoadingCard className={"!h-[20px] !w-1/4 "} />
             ) : (
               <div className="flex items-center gap-2">
-                {transaction[field]}
+                {transaction[field] !== "" ? transaction[field] : "None"}
                 {field == "hash" ? (
                   <Copy
                     className="!mb-0 !text-white1"
@@ -172,8 +172,8 @@ export const TxBox = () => {
     <>
       <SearchBar className="hidden below-lg:flex" />
       <div className="primary-box below-lg:mt-8">
-        <div className="flex justify-between items-center">
-          <h1 className="headerExa w-full">Transaction Detail</h1>
+        <div className="flex justify-between items-center pb-4">
+          <h1 className="headerExa w-full">Transaction Details</h1>
 
           <SearchBar className={"below-lg:hidden"} />
         </div>

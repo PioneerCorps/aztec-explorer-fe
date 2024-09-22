@@ -45,11 +45,13 @@ export const TxTable = ({
           </Link>
           <Copy string={tx.hash} />
         </div>
-
         <div className="w-[10%]">
-          <div className="button-purple w-min px-5 py-2 h-full">
+          <Link
+            to={`/tx/${tx.hash}`}
+            className="button-purple w-min px-5 py-2 h-full"
+          >
             {tx.blockNumber}
-          </div>
+          </Link>
         </div>
         <div className="w-[18%]">{`${timeSince(tx.timestamp)}`}</div>
         <div className="w-[10%]">{tx.index}</div>

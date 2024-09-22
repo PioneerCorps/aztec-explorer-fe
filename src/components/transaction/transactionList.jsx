@@ -2,7 +2,7 @@ import { getTotalTxCount, getTransactions } from "../../api/api";
 import { useState, useEffect, useRef } from "react";
 import { usePagination } from "../../hooks/usePagination";
 import { TxTable } from "./txTable";
-
+import { SearchBar } from "../landing/searchBar";
 export const TransactionList = () => {
   const [transactions, setTransactions] = useState([]);
   const [txCount, setTxCount] = useState(undefined);
@@ -54,9 +54,19 @@ export const TransactionList = () => {
   }, []);
 
   return (
-    <div className="px-[6.5vw] py-[73px]">
-      <TxTable transactions={transactions} loading={loading} error={error} />
-      {renderPaginationButtons()}
+    <div className="px-[6.5vw] py-[73px] below-lg:py-[40px]">
+      <SearchBar className="hidden below-lg:flex" />
+      <div className="primary-box below-lg:mt-8">
+        <div className="flex justify-between items-center pb-4">
+          <div className="w-full">
+            <h1 className=" headerExa w-full !text-2xl">Transactions</h1>
+            <div className="text-pastelPink font-extralight text-sm">{`${txCount} Transactions found!`}</div>
+          </div>
+          <SearchBar className={"below-lg:hidden"} />
+        </div>
+        <TxTable transactions={transactions} loading={loading} error={error} />
+        {renderPaginationButtons()}
+      </div>
     </div>
   );
 };

@@ -7,6 +7,7 @@ import { timeSince } from "../common/getTimePassed";
 import LoadingCard from "../common/loadingCard";
 import { Copy } from "../common/copyToClipboard";
 import { LoadingSkeleton } from "../common/loadingSkeleton";
+import { PiCubeFocus } from "react-icons/pi";
 
 export const LatestBlocks = () => {
   const [blocks, setBlocks] = useState([]);
@@ -47,7 +48,7 @@ export const LatestBlocks = () => {
           className="card below-mobile:flex-col below-mobile:gap-3 below-mobile:py-5 below-mobile:items-start"
         >
           <div className="flex items-center gap-3 below-mobile:w-full below-mobile:border-b below-mobile:border-bgLight1 below-mobile:pb-3">
-            <BlockIcon
+            <PiCubeFocus
               className="text-white1 h-7 w-7 min-w-7 min-h-7 below-mobile:hidden
             "
             />

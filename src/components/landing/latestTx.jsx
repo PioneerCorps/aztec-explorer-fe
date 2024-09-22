@@ -77,9 +77,12 @@ export const LatestTx = () => {
             </div>
           </div>
         </div>
-        <div className="button-orange  text-nowrap !max-w-none text-xs ">
+        <Link
+          to={`/block/${blockHashes[tx.blockNumber]}`}
+          className="button-orange  text-nowrap !max-w-none text-xs "
+        >
           {tx.transactionFee} TST
-        </div>
+        </Link>
       </div>
     ));
 
