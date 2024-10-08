@@ -36,10 +36,10 @@ export const BlockBox = () => {
     const infoFields = Object.keys(fieldLabels).map((field) => {
       return (
         <div className=" flex below-lg:flex-col below-lg:gap-2 gap-24 justify-between text-sm below-lg:border-b below-lg:border-bgLight1 below-lg:pb-2 ">
-          <div className="min-w-[250px] below-lg:min-w-[110px] font-light text-nowrap  text-white1">
+          <div className="min-w-[250px] below-lg:min-w-[110px] font-light text-nowrap  text-header">
             {fieldLabels[field]}:
           </div>
-          <div className="w-full overflow-hidden text-ellipsis font-extralight flex items-center gap-2  below-mobile:break-all">
+          <div className="w-full overflow-hidden text-ellipsis font-extralight flex items-center gap-2  below-mobile:break-all text-dark">
             {!block[field] ? (
               <LoadingCard className={"!h-[20px] !w-1/4"} />
             ) : field == "timestamp" ? (
@@ -51,7 +51,10 @@ export const BlockBox = () => {
               block[field]
             )}
             {field == "hash" && !loading ? (
-              <Copy className="!mb-0 !text-white1" string={block[field]} />
+              <Copy
+                className="!mb-0 text-white1 dark:text-textDark2"
+                string={block[field]}
+              />
             ) : null}
           </div>
         </div>
@@ -100,7 +103,7 @@ export const BlockBox = () => {
             <h1 className="headerExa w-full !text-2xl">{`Block #${
               block.number ? block.number : ""
             }`}</h1>
-            <div className="text-pastelPink font-extralight text-sm">{`${
+            <div className="text-link">{`${
               block.txCount ? block.txCount : ""
             } Transactions found`}</div>
           </div>

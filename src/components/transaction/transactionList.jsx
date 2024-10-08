@@ -60,7 +60,7 @@ export const TransactionList = () => {
         <div className="flex justify-between items-center pb-4">
           <div className="w-full">
             <h1 className=" headerExa w-full !text-2xl">Transactions</h1>
-            <div className="text-pastelPink font-extralight text-sm">{`${txCount} Transactions found!`}</div>
+            <div className="text-link !no-underline">{`${txCount} Transactions found!`}</div>
           </div>
           <SearchBar className={"below-lg:hidden"} />
         </div>

@@ -45,35 +45,34 @@ export const LatestBlocks = () => {
       return (
         <div
           key={block.hash}
-          className="card below-mobile:flex-col below-mobile:gap-3 below-mobile:py-5 below-mobile:items-start"
+          className="card below-mobile:flex-col below-mobile:gap-3 below-mobile:py-5 below-mobile:items-start "
         >
           <div className="flex items-center gap-3 below-mobile:w-full below-mobile:border-b below-mobile:border-bgLight1 below-mobile:pb-3">
             <PiCubeFocus
-              className="text-white1 h-7 w-7 min-w-7 min-h-7 below-mobile:hidden
+              className="text-white1 dark:text-textDark1 h-7 w-7 min-w-7 min-h-7 below-mobile:hidden
             "
             />
             <div className="flex items-end justify-between gap-1 !min-w-[120px]  ">
               <div className="flex flex-col">
-                <Link to={`/block/${block.hash}`}>{block.number}</Link>
-                <Link
-                  to={`/block/${block.hash}`}
-                  className="font-thin  underline flex items-center gap-1 text-pastelPink"
-                >
+                <Link className="text-header" to={`/block/${block.hash}`}>
+                  {block.number}
+                </Link>
+                <Link to={`/block/${block.hash}`} className="text-link">
                   {` ${block.hash.slice(0, 6)}.......${block.hash.slice(
                     block.hash.length - 4
                   )}`}
                 </Link>
               </div>
-              <Copy string={block.hash} />
+              <Copy className="dark:text-textDark2" string={block.hash} />
             </div>
           </div>
           <div className="flex items-end justify-between gap-1 !min-w-[105px] below-mobile:w-full below-mobile:border-b below-mobile:border-bgLight1 below-mobile:pb-3 below-lg:justify-normal">
             <div className="flex flex-col font-light ">
-              <div className="flex gap-1 ">Builder:</div>
+              <div className="flex gap-1 text-header">Builder:</div>
               <div className="flex gap-1 ">
                 <Link
                   to={`/address/${block.feeRecipient}`}
-                  className="font-thin text-pastelPink underline flex items-center gap-1"
+                  className="text-link"
                 >{` ${block.feeRecipient.slice(
                   0,
                   5
@@ -82,7 +81,7 @@ export const LatestBlocks = () => {
                 )}`}</Link>
               </div>
             </div>
-            <Copy string={block.feeRecipient} />
+            <Copy className="dark:text-textDark2" string={block.feeRecipient} />
           </div>
           <Link
             to={`/block/${block.hash}`}
@@ -99,12 +98,12 @@ export const LatestBlocks = () => {
     );
   };
   return (
-    <div className=" h-full primary-box w-1/2 below-lg:w-full !gap-4">
+    <div className=" h-full primary-box w-1/2 below-lg:w-full !gap-4 ">
       <h1 className="headerExa pb-3 pl-[15px]">Latest Blocks</h1>
       {blockData()}
       <Link
         to={`/blocks`}
-        className=" w-full !h-min !py-4 flex items-center justify-center secondary-box text-sm font-light "
+        className=" w-full !h-min !py-3 flex items-center justify-center secondary-box text-header text-sm font-light"
       >
         View All Blocks
       </Link>

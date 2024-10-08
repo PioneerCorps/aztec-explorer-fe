@@ -9,6 +9,7 @@ import {
 } from "react-icons/md";
 import { Link, useLocation } from "react-router-dom";
 import logo from "../../assets/logo.webp";
+import { ThemeToggler } from "./themeToggler";
 export const Header = () => {
   const [type, setType] = useState("main");
   const [isPanelOpen, setIsPanelOpen] = useState(false);
@@ -105,8 +106,8 @@ export const Header = () => {
       <div
         className={` 
         ${type == "main" && "top-[30px] h-[60px] absolute"}
-        ${type == "alt" && "header h-[120px] py-[30px]"}
-        flex justify-between items-center w-full z-50  text-sm pl-[6.5vw]`}
+        ${type == "alt" && "h-[120px] py-[30px] relative"}
+        flex justify-between items-center w-full z-50  text-sm pl-[6.5vw]  `}
       >
         <Link className="w-1/3" to="/">
           <img
@@ -122,9 +123,8 @@ export const Header = () => {
         </div>
         <div className=" w-1/3 flex justify-end items-center h-full">
           <div className=" h-full py-2 flex items-center bg-pastelPink  gap-2 px-3 border border-orangeOp rounded-tl-[45px]">
-            <div className="button-orange border border-purpleOp50 !rounded-tl-[32px] !rounded-[5px]">
-              <MdOutlineDarkMode className=" -mr-2 mt-[1px] min-w-4 min-h-4 w-4 h-4" />
-            </div>
+            <ThemeToggler />
+
             <div className="button-orange border !w-full border-purpleOp50 text-nowrap  !rounded-[5px] flex !items-center !justify-center !pl-6 !pr-4 !max-w-none below-lg:hidden ">
               Aztec Devnet
               <MdOutlineArrowDropDown className="h-4 w-4 text-white mt-[2px]" />
@@ -134,6 +134,11 @@ export const Header = () => {
               <MdOutlinePersonOutline className=" !p-0 min-w-4 min-h-4 w-4 h-4" />
             </div>
           </div>
+          <div
+            className={`${
+              type == "alt" && "!flex"
+            } hidden header w-full h-full absolute -z-10`}
+          ></div>
         </div>
       </div>
     );

@@ -7,7 +7,7 @@ export const BlockTable = ({ blocks, loading, error }) => {
     return (
       <>
         <h1 className="!hidden below-mobile:flex">Blocks</h1>
-        <div className="flex px-[16px] pb-6 font-medium justify-between gap-0 below-lg:text-xs below-mobile:hidden">
+        <div className="flex px-[16px] pb-6 font-medium justify-between gap-0 below-lg:text-xs below-mobile:hidden text-header">
           <div className="w-[21%] below-lg:text-center flex items-center">
             Hash
           </div>
@@ -37,25 +37,25 @@ export const BlockTable = ({ blocks, loading, error }) => {
           key={Math.random()}
           className="  below-mobile:!hidden !gap-0 card font-light !text-xs"
         >
-          <div className="w-[21%] text-pastelPink overflow-hidden text-ellipsis flex gap-1 items-center ">
+          <div className="w-[21%] overflow-hidden text-ellipsis flex gap-1 items-center ">
             <Link
               to={`/block/${block.hash}`}
-              className="underline underline-offset-2"
+              className="text-link underline-offset-2"
             >
               {` ${block.hash.slice(0, 7)}..........${block.hash.slice(
                 block.hash.length - 9
               )}`}
             </Link>
-            <Copy string={block.hash} className="!mb-0" />
+            <Copy string={block.hash} className="!mb-0 dark:text-textDark2" />
           </div>
           <div className="w-[15%]">
-            <div className="button-purple w-min px-5 py-2 h-full">
+            <div className="button-purple w-min px-5 py-2 h-full text-header">
               {block.number}
             </div>
           </div>
-          <div className="w-[18%]">{timeSince(block.timestamp)}</div>
-          <div className="w-[10%]">{block.txCount}</div>
-          <div className="w-[18%] underline text-pastelPink overflow-hidden text-ellipsis">
+          <div className="w-[18%] text-dark">{timeSince(block.timestamp)}</div>
+          <div className="w-[10%] text-dark">{block.txCount}</div>
+          <div className="w-[18%] text-link overflow-hidden text-ellipsis">
             {` ${block.feeRecipient.slice(
               0,
               7

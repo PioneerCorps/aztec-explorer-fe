@@ -65,7 +65,7 @@ export const BlockList = () => {
           <div className="flex justify-between items-center ">
             <div className="flex flex-col w-full gap-2 pb-4">
               <h1 className="headerExa w-full !text-2xl">{`Blocks`}</h1>
-              <div className="text-pastelPink font-extralight text-sm">{`${latestBlockNumber} blocks found!`}</div>
+              <div className="text-link !no-underline">{`${latestBlockNumber} blocks found!`}</div>
             </div>
             <SearchBar className={"below-lg:hidden"} />
           </div>

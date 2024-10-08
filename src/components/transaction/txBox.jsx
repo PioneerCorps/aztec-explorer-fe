@@ -57,15 +57,15 @@ export const TxBox = () => {
       if (field === "nullifiers") {
         return (
           <div
-            className="flex gap-24 justify-between text-sm below-lg:flex-col below-lg:gap-3 below-lg:border-b below-lg:border-bgLight1 below-lg:pb-2"
+            className="flex gap-24 justify-between text-sm below-lg:flex-col below-lg:gap-3 below-lg:border-b below-lg:border-bgLight1 below-lg:pb-2 "
             key={field}
           >
-            <div className="min-w-[250px] font-light text-nowrap text-white1">
+            <div className="min-w-[250px] font-light text-nowrap text-header ">
               {fieldLabels[field]}:
             </div>
             <div className="w-full">
               <textarea
-                className="w-[70%] h-32 p-3 font-light border border-bgLight1 bg-bgLight1OP rounded-lg resize-y leading-7 text-white1 font-monospace focus:outline-none below-lg:w-full "
+                className="w-[70%] h-32 p-3 font-light border border-bgLight1 bg-bgLight1OP rounded-lg resize-y leading-7 text-dark font-monospace focus:outline-none below-lg:w-full "
                 value={
                   transaction[field]
                     ? transaction[field]
@@ -94,12 +94,12 @@ export const TxBox = () => {
             className="flex gap-24 justify-between text-sm below-lg:flex-col below-lg:gap-3 below-lg:border-b below-lg:border-bgLight1 below-lg:pb-2"
             key={field}
           >
-            <div className="min-w-[250px] font-light text-nowrap text-white1">
+            <div className="min-w-[250px] font-light text-nowrap text-header">
               {fieldLabels[field]}:
             </div>
             <div className="w-full">
               <textarea
-                className="w-[70%] h-32 p-3 font-light border border-bgLight1 bg-bgLight1OP rounded-lg resize-y leading-7 text-white1 font-monospace focus:outline-none below-lg:w-full below-lg:gap-3"
+                className="w-[70%] h-32 p-3 font-light border border-bgLight1 bg-bgLight1OP rounded-lg resize-y leading-7 text-dark font-monospace focus:outline-none below-lg:w-full below-lg:gap-3"
                 value={formattedLogs}
                 readOnly
               />
@@ -113,12 +113,12 @@ export const TxBox = () => {
             className="flex gap-24 justify-between text-sm below-lg:flex-col below-lg:gap-3 below-lg:border-b below-lg:border-bgLight1 below-lg:pb-2"
             key={field}
           >
-            <div className="min-w-[250px] font-light text-nowrap text-white1">
+            <div className="min-w-[250px] font-light text-nowrap text-header">
               {fieldLabels[field]}:
             </div>
             <div className="w-full">
               <textarea
-                className="w-[70%] h-32 p-3 font-light border border-bgLight1 bg-bgLight1OP rounded-lg resize-y leading-7 text-white1 font-monospace focus:outline-none below-lg:w-full overflow-y-scroll "
+                className="w-[70%] h-32 p-3 font-light border border-bgLight1 bg-bgLight1OP rounded-lg resize-y leading-7 text-white1 text-dark font-monospace focus:outline-none below-lg:w-full overflow-y-scroll "
                 value={
                   transaction[field]
                     ? transaction[field]
@@ -139,14 +139,14 @@ export const TxBox = () => {
           className="flex gap-24 justify-between text-sm below-lg:flex-col below-lg:gap-2 below-lg:border-b below-lg:border-bgLight1 below-lg:pb-2 "
           key={field}
         >
-          <div className="min-w-[250px] font-light text-nowrap text-white1">
+          <div className="min-w-[250px] font-light text-nowrap text-header">
             {fieldLabels[field]}:
           </div>
           <div className="w-full overflow-hidden text-ellipsis font-extralight below-mobile:break-all">
             {loading ? (
               <LoadingCard className={"!h-[20px] !w-1/4 "} />
             ) : (
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 text-dark">
                 {transaction[field] !== "" ? transaction[field] : "None"}
                 {field == "hash" ? (
                   <Copy

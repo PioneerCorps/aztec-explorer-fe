@@ -39,28 +39,29 @@ export const LatestTx = () => {
         className="card below-mobile:flex-col below-mobile:gap-3 below-mobile:py-5 below-mobile:items-start"
       >
         <div className="flex items-center gap-3 below-mobile:w-full below-mobile:border-b below-mobile:border-bgLight1 below-mobile:pb-3 ">
-          <MdOutlineReceiptLong className="text-white2 h-7 w-7 min-h-7 min-w-7 below-mobile:hidden" />
+          <MdOutlineReceiptLong className="text-white2 h-7 w-7 min-h-7 min-w-7 below-mobile:hidden dark:text-textDark1" />
           <div className="flex h-full items-end justify-between gap-1 !min-w-[120px]">
             <Link to={`/tx/${tx.hash}`} className="flex flex-col">
-              <div>Hash</div>
-              <div className="font-thin text-pastelPink underline flex items-center gap-1">
+              <div className="text-header">Hash</div>
+              <div className="text-link">
                 {` ${tx.hash.slice(0, 6)}.......${tx.hash.slice(
                   tx.hash.length - 4
                 )}`}
               </div>
             </Link>
-            <Copy string={tx.hash} />
+            <Copy className="text-textDark2" string={tx.hash} />
           </div>
         </div>
         <div className="flex items-end justify-between gap-1 !min-w-[105px] below-mobile:w-full below-mobile:border-b below-mobile:border-bgLight1 below-mobile:pb-3 below-lg:justify-normal">
           <div className="flex flex-col">
             <Link
+              className="text-header"
               to={`/block/${blockHashes[tx.blockNumber]}`}
             >{`Block: ${tx.blockNumber}`}</Link>
-            <div className="flex items-end justify-between gap-1 !min-w-[120px]">
+            <div className="flex items-end justify-between gap-1 !min-w-[120px] ">
               <Link
                 to={`/block/${blockHashes[tx.blockNumber]}`}
-                className="font-thin text-pastelPink underline flex items-center gap-1 text-nowrap "
+                className="text-link text-nowrap "
               >
                 {blockHashes[tx.blockNumber] ? (
                   `${blockHashes[tx.blockNumber].slice(
@@ -73,7 +74,10 @@ export const LatestTx = () => {
                   <LoadingCard className={`!h-[20px] !w-[100px]`} />
                 )}
               </Link>
-              <Copy string={blockHashes[tx.blockNumber]} />
+              <Copy
+                className="dark:text-textDark2"
+                string={blockHashes[tx.blockNumber]}
+              />
             </div>
           </div>
         </div>
@@ -115,13 +119,13 @@ export const LatestTx = () => {
   }, []);
 
   return (
-    <div className=" h-full w-1/2 below-lg:w-full secondary-box !gap-4">
+    <div className=" h-full w-1/2 below-lg:w-full secondary-box !gap-4 ">
       <h1 className="headerExa pb-3 pl-[15px]">Latest Transactions</h1>
 
       {latestTxList()}
       <Link
         to={`/transactions`}
-        className=" w-full !h-min !py-4 flex items-center justify-center secondary-box text-sm font-light"
+        className=" w-full !h-min !py-3 flex items-center justify-center secondary-box text-header text-sm font-light"
       >
         View All Transactions
       </Link>

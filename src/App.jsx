@@ -1,12 +1,5 @@
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  useLocation,
-  useNavigate,
-  useParams,
-  Navigate,
-} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { useState } from "react";
 import { Footer } from "./components/footer/footer";
 import "./index.css";
 import { Landing } from "./components/landing/landingLayout";
@@ -18,7 +11,7 @@ import { BlockList } from "./components/block/blockList";
 import { TransactionList } from "./components/transaction/transactionList";
 function App() {
   return (
-    <div className="bg-bgDark1 w-screen relative overflow-x-hidden ">
+    <div className="bg-bgDark1  w-screen relative overflow-x-hidden dark:bg-transparent diamond-grad ">
       <Header />
       <Routes>
         <Route path="/" element={<Landing />} />

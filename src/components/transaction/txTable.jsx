@@ -12,7 +12,7 @@ export const TxTable = ({
   const renderFields = () => (
     <>
       <h1 className="!hidden below-mobile:flex">Transactions</h1>
-      <div className="flex px-[16px] pb-2 font-medium justify-between gap-5 text-sm below-lg:text-xs below-mobile:hidden ">
+      <div className="flex px-[16px] pb-2 font-medium justify-between gap-5 text-sm text-header below-lg:text-xs below-mobile:hidden ">
         <div className="w-[22%] elow-lg:text-center flex items-center">
           Hash
         </div>
@@ -37,13 +37,13 @@ export const TxTable = ({
         key={Math.random()}
         className="below-mobile:!hidden card font-light !text-xs"
       >
-        <div className="w-[22%] text-pastelPink flex gap-1 overflow-hidden text-ellipsis">
-          <Link className="underline underline-offset-2" to={`/tx/${tx.hash}`}>
+        <div className="w-[22%] text-link overflow-hidden text-ellipsis">
+          <Link className="text-link" to={`/tx/${tx.hash}`}>
             {` ${tx.hash.slice(0, 7)}..........${tx.hash.slice(
               tx.hash.length - 9
             )}`}
           </Link>
-          <Copy string={tx.hash} />
+          <Copy className="dark:text-textDark2" string={tx.hash} />
         </div>
         <div className="w-[10%]">
           <Link
@@ -53,9 +53,9 @@ export const TxTable = ({
             {tx.blockNumber}
           </Link>
         </div>
-        <div className="w-[18%]">{`${timeSince(tx.timestamp)}`}</div>
-        <div className="w-[10%]">{tx.index}</div>
-        <div className="w-[22%] underline text-pastelPink overflow-hidden text-ellipsis">
+        <div className="w-[18%] text-dark">{`${timeSince(tx.timestamp)}`}</div>
+        <div className="w-[10%] text-dark">{tx.index}</div>
+        <div className="w-[22%] text-link overflow-hidden text-ellipsis">
           {` ${tx.hash.slice(0, 5)}..........${tx.hash.slice(
             tx.hash.length - 7
           )}`}

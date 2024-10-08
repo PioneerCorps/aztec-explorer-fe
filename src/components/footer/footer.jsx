@@ -1,7 +1,7 @@
 import logo from "../../assets/logo.webp";
 export const Footer = () => {
   return (
-    <div className="bg-bgDark2 flex justify-between w-full py-[65px] px-[6.5vw] !text-xs below-mobile:gap-3 ">
+    <div className="bg-bgDark2 flex justify-between w-full py-[65px] px-[6.5vw] !text-xs below-mobile:gap-3 dark:bg-bgDark3 ">
       <div className="flex items-center justify-center text-white gap-3">
         <img className=" h-[60px] w-[60px]" src={logo} />
         <div className="headerExa below-mobile:hidden">
