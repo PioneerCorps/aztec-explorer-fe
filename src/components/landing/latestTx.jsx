@@ -49,7 +49,7 @@ export const LatestTx = () => {
                 )}`}
               </div>
             </Link>
-            <Copy className="text-textDark2" string={tx.hash} />
+            <Copy className="dark:text-textDark2" string={tx.hash} />
           </div>
         </div>
         <div className="flex items-end justify-between gap-1 !min-w-[105px] below-mobile:w-full below-mobile:border-b below-mobile:border-bgLight1 below-mobile:pb-3 below-lg:justify-normal">
@@ -119,7 +119,7 @@ export const LatestTx = () => {
   }, []);
 
   return (
-    <div className=" h-full w-1/2 below-lg:w-full secondary-box !gap-4 ">
+    <div className=" h-full w-1/2 below-lg:w-full secondary-box !gap-4 shadow-box-shadow-sm ">
       <h1 className="headerExa pb-3 pl-[15px]">Latest Transactions</h1>
 
       {latestTxList()}

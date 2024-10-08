@@ -98,12 +98,12 @@ export const LatestBlocks = () => {
     );
   };
   return (
-    <div className=" h-full primary-box w-1/2 below-lg:w-full !gap-4 ">
+    <div className=" h-full primary-box w-1/2 below-lg:w-full !gap-4 shadow-box-shadow-sm ">
       <h1 className="headerExa pb-3 pl-[15px]">Latest Blocks</h1>
       {blockData()}
       <Link
         to={`/blocks`}
-        className=" w-full !h-min !py-3 flex items-center justify-center secondary-box text-header text-sm font-light"
+        className=" w-full !h-min !py-3 flex items-center justify-center secondary-box text-header text-sm font-light "
       >
         View All Blocks
       </Link>

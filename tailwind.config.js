@@ -42,7 +42,7 @@ export default {
       },
       boxShadow: {
         "box-shadow-md": "1px 2px 2px  rgba(0, 0, 0, 0.5)",
-        "box-shadow-sm": "1px 3px 5px rgba(0, 0, 0, 0.3)",
+        "box-shadow-sm": "1px 3px 5px rgba(0, 0, 0, 0.15)",
       },
 
       screens: {

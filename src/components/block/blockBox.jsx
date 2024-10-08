@@ -35,7 +35,7 @@ export const BlockBox = () => {
 
     const infoFields = Object.keys(fieldLabels).map((field) => {
       return (
-        <div className=" flex below-lg:flex-col below-lg:gap-2 gap-24 justify-between text-sm below-lg:border-b below-lg:border-bgLight1 below-lg:pb-2 ">
+        <div className=" flex below-lg:flex-col below-lg:gap-2 gap-24 justify-between text-sm below-lg:border-b below-lg:border-bgLight1 below-lg:dark:border-bgLight1OP below-lg:pb-2 ">
           <div className="min-w-[250px] below-lg:min-w-[110px] font-light text-nowrap  text-header">
             {fieldLabels[field]}:
           </div>
