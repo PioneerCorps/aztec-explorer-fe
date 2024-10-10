@@ -19,7 +19,7 @@ export const SearchBar = ({ className }) => {
   const searchResultsRef = useRef(null);
 
   useEffect(() => {
-    if (!inputValue || Number) return;
+    if (!inputValue || Number(inputValue == 0)) return;
 
     const debounceTimer = setTimeout(() => {
       const fetchSearchResults = async () => {
