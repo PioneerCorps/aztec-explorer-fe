@@ -4,6 +4,7 @@ import { getSearchResults } from "../../api/api";
 import makeBlockie from "ethereum-blockies-base64";
 import { Link } from "react-router-dom";
 import { LoadingSkeleton } from "../common/loadingSkeleton";
+import { CgSpinner } from "react-icons/cg";
 
 export const SearchBar = ({ className }) => {
   const [inputValue, setInputValue] = useState("");
@@ -23,7 +24,7 @@ export const SearchBar = ({ className }) => {
         setLoading(true);
         setError(null);
         try {
-          const searchRes = await getSearchResults(inputValue);
+          const searchRes = await getSearchResults(inputValue.toLowerCase());
           setSearchResult(searchRes);
           setOnceLoaded(true);
         } catch (err) {
@@ -31,7 +32,7 @@ export const SearchBar = ({ className }) => {
           setError("Failed to search results. Please try again later.");
         } finally {
           setLoading(false);
-          setIsVisible(true); // Show results when search completes
+          setIsVisible(true);
         }
       };
 
@@ -59,9 +60,6 @@ export const SearchBar = ({ className }) => {
   }, []);
 
   const renderSearchResults = () => {
-    const isAccount = searchResult?.accounts;
-    const isBlocks = searchResult?.blocks;
-    const isTransactions = searchResult?.transactions;
     console.log(searchResult);
     const renderResults = (type) => {
       if (!searchResult || searchResult?.[type]?.length === 0) return null;
@@ -76,7 +74,7 @@ export const SearchBar = ({ className }) => {
 
       return (
         <div className={`flex flex-col gap-3`}>
-          <h1 className="text-header text-white text-xs border-b pb-1 border-borderOP ">
+          <h1 className="text-header text-white text-xs border-b pb-1 border-borderOP dark:border-white1 ">
             {type.charAt(0).toUpperCase() + type.slice(1)}
           </h1>
           {limitResults.map((result, index) => {
@@ -94,7 +92,9 @@ export const SearchBar = ({ className }) => {
                     result.address ? result.address : result.hash
                   )}
                 />
-                <p>{result.address ? result.address : result.hash}</p>
+                <p className="text-header">
+                  {result.address ? result.address : result.hash}
+                </p>
               </Link>
             );
           })}
@@ -105,7 +105,7 @@ export const SearchBar = ({ className }) => {
     return (
       <div
         ref={searchResultsRef}
-        className={`absolute top-[44px] h-[300px] w-full bg-bgDark2 bg-opacity-40 border border-pastelPurple rounded-xl p-4 overflow-y-scroll flex flex-col gap-2  backdrop-blur-lg ${
+        className={`absolute top-[44px] max-h-[300px] w-full secondary-box rounded-xl p-4 overflow-y-scroll flex flex-col gap-2  backdrop-blur-lg ${
           (!inputValue || !onceLoaded || !isVisible) && "hidden"
         }`}
       >
@@ -136,6 +136,9 @@ export const SearchBar = ({ className }) => {
         className="relative input !border-l-0 !rounded-l-none tracking-wide z-10 -ml-[1px]"
         onFocus={() => setIsVisible(true)} // Show results when input is focused
       />
+      {loading && (
+        <CgSpinner className="absolute right-[10px] top-[4px] text-textDark1 h-[25px] w-[25px] z-30 animate-spin" />
+      )}
       {renderSearchResults()}
     </div>
   );
