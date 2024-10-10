@@ -5,10 +5,12 @@ import makeBlockie from "ethereum-blockies-base64";
 import { Link } from "react-router-dom";
 import { LoadingSkeleton } from "../common/loadingSkeleton";
 import { CgSpinner } from "react-icons/cg";
+import { MdOutlineClose } from "react-icons/md";
 
 export const SearchBar = ({ className }) => {
   const [inputValue, setInputValue] = useState("");
   const [searchResult, setSearchResult] = useState();
+  const [emptyResult, setEmptyResult] = useState(false);
   const [loading, setLoading] = useState(false);
   const [onceLoaded, setOnceLoaded] = useState(false);
   const [error, setError] = useState(null);
@@ -17,19 +19,29 @@ export const SearchBar = ({ className }) => {
   const searchResultsRef = useRef(null);
 
   useEffect(() => {
-    if (!inputValue) return;
+    if (!inputValue || Number) return;
 
     const debounceTimer = setTimeout(() => {
       const fetchSearchResults = async () => {
         setLoading(true);
-        setError(null);
+        setError(false);
+        setEmptyResult(false);
         try {
           const searchRes = await getSearchResults(inputValue.toLowerCase());
           setSearchResult(searchRes);
           setOnceLoaded(true);
+          if (
+            !searchRes ||
+            (!searchRes.accounts.length &&
+              !searchRes.blocks.length &&
+              !searchRes.transactions.length)
+          ) {
+            setEmptyResult(true);
+          }
         } catch (err) {
           console.error("Failed to fetch search results:", err);
           setError("Failed to search results. Please try again later.");
+          setError(true);
         } finally {
           setLoading(false);
           setIsVisible(true);
@@ -61,8 +73,11 @@ export const SearchBar = ({ className }) => {
 
   const renderSearchResults = () => {
     console.log(searchResult);
+
     const renderResults = (type) => {
-      if (!searchResult || searchResult?.[type]?.length === 0) return null;
+      if (!searchResult || searchResult?.[type]?.length === 0) {
+        return null;
+      }
       const resultTag = searchResult[type];
       const limitResults = resultTag.slice(0, 2);
 
@@ -81,7 +96,7 @@ export const SearchBar = ({ className }) => {
             return (
               <Link
                 to={`/${routingList[type]}/${
-                  result?.hash ? result.hash : result.address
+                  result?.hash ? result?.hash : result?.address
                 }`}
                 key={index}
                 className="text-white font-extralight rounded-md text-sm p-2 flex items-center gap-4 cursor-pointer hover:bg-pinkOp"
@@ -102,14 +117,23 @@ export const SearchBar = ({ className }) => {
       );
     };
 
+    const emptyCard = () => {
+      return (
+        <div className="font-light text-white1">
+          Search does not match any blocks, transactions or contracts!
+        </div>
+      );
+    };
     return (
       <div
         ref={searchResultsRef}
         className={`absolute top-[44px] max-h-[300px] w-full secondary-box rounded-xl p-4 overflow-y-scroll flex flex-col gap-2  backdrop-blur-lg ${
-          (!inputValue || !onceLoaded || !isVisible) && "hidden"
+          (!inputValue || !onceLoaded || !isVisible) && "!hidden"
         }`}
       >
-        {loading ? (
+        {emptyResult || error ? (
+          emptyCard()
+        ) : loading ? (
           <LoadingSkeleton itemCount={5} />
         ) : (
           <>
@@ -134,10 +158,15 @@ export const SearchBar = ({ className }) => {
         onChange={(e) => setInputValue(e.target.value)}
         placeholder="Search by Address, Tx Hash, Block, Token, Contract, Domain"
         className="relative input !border-l-0 !rounded-l-none tracking-wide z-10 -ml-[1px]"
-        onFocus={() => setIsVisible(true)} // Show results when input is focused
+        onFocus={() => setIsVisible(true)}
       />
-      {loading && (
+      {loading ? (
         <CgSpinner className="absolute right-[10px] top-[4px] text-textDark1 h-[25px] w-[25px] z-30 animate-spin" />
+      ) : (
+        <MdOutlineClose
+          onClick={() => setInputValue("")}
+          className="absolute right-[10px] top-[7px] text-textDark1 h-[20px] w-[20px] z-30 hover:bg-bgLight1OP rounded-full duration-200"
+        />
       )}
       {renderSearchResults()}
     </div>
