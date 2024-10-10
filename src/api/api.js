@@ -95,3 +95,47 @@ export const getTotalTxCount = async () => {
     throw error;
   }
 };
+export const getAddress = async (address) => {
+  try {
+    const response = await axios.get(
+      `${BASE_URL}/accounts/getByAddress/${address}`
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching block by number:", error);
+    throw error;
+  }
+};
+export const getAddresses = async (page, limit) => {
+  try {
+    const response = await axios.get(`${BASE_URL}/accounts/get`, {
+      params: {
+        page,
+        limit,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching blocks:", error);
+    throw error;
+  }
+};
+
+export const getAccountCount = async () => {
+  try {
+    const response = await axios.get(`${BASE_URL}/accounts/count`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching block by hash:", error);
+    throw error;
+  }
+};
+export const getSearchResults = async (query) => {
+  try {
+    const response = await axios.get(`${BASE_URL}/search/${query}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching block by hash:", error);
+    throw error;
+  }
+};

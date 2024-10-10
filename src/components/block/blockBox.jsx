@@ -20,9 +20,12 @@ export const BlockBox = () => {
     hash: "Block Hash",
     timestamp: "Timestamp",
     txCount: "Transaction Count",
+    size: "Block Size",
     feeRecipient: "Fee Recipient",
     coinbaseAccount: "Coinbase Account",
     totalFees: "Total Fees",
+    feePerDaGas: "Fee Per DA Gas",
+    feePerL2Gas: "Fee Per L2 Gas",
   };
 
   const renderBlockInfo = () => {

@@ -7,34 +7,54 @@ import { ContractCode } from "./contractCode";
 
 import { SearchBar } from "../landing/searchBar";
 import { useState, useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { getAddress } from "../../api/api";
 
 export const Address = () => {
-  // Tab options
+  const [address, setAddress] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const { hash } = useParams();
+
   const tabs = ["public", "private", "contract", "read", "write"];
   const location = useLocation();
   const navigate = useNavigate();
 
-  // State to manage the currently selected tab
   const [tab, setTab] = useState("public");
 
   useEffect(() => {
-    // Extract the hash from the URL and remove the leading '#'
     const currentHash = location.hash.replace("#", "");
 
     if (!currentHash) {
-      // If there is no hash, navigate to the default 'public' tab
       navigate("#public", { replace: true });
       setTab("public");
     } else if (tabs.includes(currentHash)) {
-      // If the hash corresponds to a valid tab, update the tab state
       setTab(currentHash);
     } else {
-      // If the hash doesn't match any tab, default to 'public'
       navigate("#public", { replace: true });
       setTab("public");
     }
   }, [location, navigate, tabs]);
+
+  useEffect(() => {
+    if (!hash) return;
+    const fetchAddress = async () => {
+      setLoading(true);
+      setError(null);
+      try {
+        const addressInfo = await getAddress(hash);
+
+        setAddress(addressInfo);
+      } catch (err) {
+        console.error("Failed to fetch address:", err);
+        setError("Failed to fetch address. Please try again later.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchAddress();
+  }, []);
 
   const renderTabs = () => {
     return (
@@ -74,16 +94,14 @@ export const Address = () => {
       <div className="primary-box">
         <div className="flex items-center">
           <div className="flex-col gap-2 w-full pb-6">
-            <div className="headerExa !text-4xl">Address</div>
-            <div className="text-pastelPink font-extralight underline">
-              0xb6872F0C58B6Cf67EfBbEFcE230cC75B006F1A09
-            </div>
+            <div className="headerExa w-full !text-2xl">Address</div>
+            {/* <div className="text-link ">{address.address}</div> */}
           </div>
           <SearchBar />
         </div>
-        <AddressSummary />
+        <AddressSummary addressInfo={address} />
         {renderTabs()}
-        {renderContent()}
+        {/* {renderContent()} */}
       </div>
     </div>
   );

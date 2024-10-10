@@ -11,10 +11,11 @@ export const TxBox = () => {
   const [transaction, setTransaction] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-
+  console.log(transaction);
   const fieldLabels = {
     blockNumber: "Included in Block",
     hash: "Transaction Hash",
+    revertCode: "Status",
     index: "Index",
     transactionFee: "Transaction Fee",
     noteHashes: "Note Hashes",
