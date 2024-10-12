@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { MdOutlineFilterAlt } from "react-icons/md";
 import { BsSortUp, BsSortUpAlt } from "react-icons/bs";
 
@@ -6,6 +6,20 @@ export const useListFilter = () => {
   const [filters, setFilters] = useState({});
 
   const renderFilterElement = (type) => {
+    const useOutsideClick = (ref, callback) => {
+      useEffect(() => {
+        const handleClickOutside = (event) => {
+          if (ref.current && !ref.current.contains(event.target)) {
+            callback();
+          }
+        };
+
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+          document.removeEventListener("mousedown", handleClickOutside);
+        };
+      }, [ref, callback]);
+    };
     const filterLogo = (filterOpenState, filterOpenSetter) => {
       return (
         <MdOutlineFilterAlt
@@ -19,10 +33,14 @@ export const useListFilter = () => {
 
     const renderTimeFilter = () => {
       const [isFilterOpen, setIsFilterOpen] = useState(false);
+      const filterRef = useRef(null);
+
+      useOutsideClick(filterRef, () => setIsFilterOpen(false));
       return (
         <>
           {filterLogo(isFilterOpen, setIsFilterOpen)}
           <div
+            ref={filterRef}
             className={`${
               !isFilterOpen && "!hidden"
             } absolute top-[25px] w-[250px] primary-box !p-3 z-50 !rounded-md flex flex-col`}
@@ -54,6 +72,7 @@ export const useListFilter = () => {
                         Date.now() - 1000 * 60 * 60 // Subtract 1 hour
                       ).toISOString(),
                     });
+                    setIsFilterOpen(false);
                   }}
                   className="border px-2 rounded-full bg-bgDark3 border-pinkOp cursor-pointer duration-200 hover:bg-bgLight1 hover:border-purpleOp50"
                 >
@@ -68,6 +87,7 @@ export const useListFilter = () => {
                         Date.now() - 1000 * 60 * 60 * 24 // Subtract 24 hours
                       ).toISOString(),
                     });
+                    setIsFilterOpen(false);
                   }}
                   className="border px-2 rounded-full bg-bgDark3 border-pinkOp cursor-pointer duration-200 hover:bg-bgLight1 hover:border-purpleOp50"
                 >
@@ -82,6 +102,7 @@ export const useListFilter = () => {
                         Date.now() - 1000 * 60 * 60 * 24 * 7 // Subtract 7 days
                       ).toISOString(),
                     });
+                    setIsFilterOpen(false);
                   }}
                   className="border px-2 rounded-full bg-bgDark3 border-pinkOp cursor-pointer duration-200 hover:bg-bgLight1 hover:border-purpleOp50"
                 >
@@ -98,6 +119,7 @@ export const useListFilter = () => {
                         Date.now() - 1000 * 60 * 60 * 24 * 30 // Subtract 1 month (~30 days)
                       ).toISOString(),
                     });
+                    setIsFilterOpen(false);
                   }}
                   className="border px-2 rounded-full bg-bgDark3 border-pinkOp cursor-pointer duration-200 hover:bg-bgLight1 hover:border-purpleOp50"
                 >
@@ -112,6 +134,7 @@ export const useListFilter = () => {
                         Date.now() - 1000 * 60 * 60 * 24 * 30 * 3 // Subtract 3 months (~90 days)
                       ).toISOString(),
                     });
+                    setIsFilterOpen(false);
                   }}
                   className="border px-2 rounded-full bg-bgDark3 border-pinkOp cursor-pointer duration-200 hover:bg-bgLight1 hover:border-purpleOp50"
                 >
@@ -126,6 +149,7 @@ export const useListFilter = () => {
                         Date.now() - 1000 * 60 * 60 * 24 * 30 * 6 // Subtract 6 months (~180 days)
                       ).toISOString(),
                     });
+                    setIsFilterOpen(false);
                   }}
                   className="border px-2 rounded-full bg-bgDark3 border-pinkOp cursor-pointer duration-200 hover:bg-bgLight1 hover:border-purpleOp50"
                 >
@@ -142,10 +166,14 @@ export const useListFilter = () => {
       const [isFilterOpen, setIsFilterOpen] = useState(false);
       const [minFilter, setMinFilter] = useState("");
       const [maxFilter, setMaxFilter] = useState("");
+      const filterRef = useRef(null);
+
+      useOutsideClick(filterRef, () => setIsFilterOpen(false));
       return (
         <>
           {filterLogo(isFilterOpen, setIsFilterOpen)}
           <div
+            ref={filterRef}
             className={`${
               !isFilterOpen && "!hidden"
             } absolute top-[25px] -left-[100px] w-[250px] primary-box !p-3 z-50 !rounded-md flex flex-col`}
@@ -217,10 +245,14 @@ export const useListFilter = () => {
       const [isFilterOpen, setIsFilterOpen] = useState(false);
       const [minFilter, setMinFilter] = useState("");
       const [maxFilter, setMaxFilter] = useState("");
+      const filterRef = useRef(null);
+
+      useOutsideClick(filterRef, () => setIsFilterOpen(false));
       return (
         <>
           {filterLogo(isFilterOpen, setIsFilterOpen)}
           <div
+            ref={filterRef}
             className={`${
               !isFilterOpen && "!hidden"
             } absolute top-[25px] -left-[100px] w-[250px] primary-box !p-3 z-50 !rounded-md flex flex-col`}
@@ -292,10 +324,14 @@ export const useListFilter = () => {
       const [isFilterOpen, setIsFilterOpen] = useState(false);
       const [minFilter, setMinFilter] = useState("");
       const [maxFilter, setMaxFilter] = useState("");
+      const filterRef = useRef(null);
+
+      useOutsideClick(filterRef, () => setIsFilterOpen(false));
       return (
         <>
           {filterLogo(isFilterOpen, setIsFilterOpen)}
           <div
+            ref={filterRef}
             className={`${
               !isFilterOpen && "!hidden"
             } absolute top-[25px] -left-[100px] w-[250px] primary-box !p-3 z-50 !rounded-md flex flex-col`}
@@ -367,10 +403,14 @@ export const useListFilter = () => {
       const [isFilterOpen, setIsFilterOpen] = useState(false);
       const [minFilter, setMinFilter] = useState("");
       const [maxFilter, setMaxFilter] = useState("");
+      const filterRef = useRef(null);
+
+      useOutsideClick(filterRef, () => setIsFilterOpen(false));
       return (
         <>
           {filterLogo(isFilterOpen, setIsFilterOpen)}
           <div
+            ref={filterRef}
             className={`${
               !isFilterOpen && "!hidden"
             } absolute top-[25px] -left-[100px] w-[250px] primary-box !p-3 z-50 !rounded-md flex flex-col`}
@@ -442,10 +482,14 @@ export const useListFilter = () => {
       const [isFilterOpen, setIsFilterOpen] = useState(false);
       const [minFilter, setMinFilter] = useState("");
       const [maxFilter, setMaxFilter] = useState("");
+      const filterRef = useRef(null);
+
+      useOutsideClick(filterRef, () => setIsFilterOpen(false));
       return (
         <>
           {filterLogo(isFilterOpen, setIsFilterOpen)}
           <div
+            ref={filterRef}
             className={`${
               !isFilterOpen && "!hidden"
             } absolute top-[25px] -left-[100px] w-[250px] primary-box !p-3 z-50 !rounded-md flex flex-col`}
