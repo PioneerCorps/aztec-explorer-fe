@@ -24,14 +24,32 @@ export const getBlockByHash = async (hash) => {
   }
 };
 
-export const getBlocks = async (page, limit) => {
+export const getBlocks = async (page, limit, filters = {}) => {
   try {
-    const response = await axios.get(`${BASE_URL}/blocks/get`, {
-      params: {
-        page,
-        limit,
-      },
-    });
+    const params = {
+      page,
+      limit,
+    };
+    const {
+      sort,
+      order,
+      startTimestamp,
+      endTimestamp,
+      minTotalFees,
+      maxTotalFees,
+      minTxCount,
+      maxTxCount,
+    } = filters;
+
+    if (sort) params.sort = sort;
+    if (order) params.order = order;
+    if (startTimestamp) params.startTimestamp = startTimestamp;
+    if (endTimestamp) params.endTimestamp = endTimestamp;
+    if (minTotalFees) params.minTotalFees = minTotalFees;
+    if (maxTotalFees) params.maxTotalFees = maxTotalFees;
+    if (minTxCount) params.minTxCount = minTxCount;
+    if (maxTxCount) params.maxTxCount = maxTxCount;
+    const response = await axios.get(`${BASE_URL}/blocks/get`, { params });
     return response.data;
   } catch (error) {
     console.error("Error fetching blocks:", error);
@@ -62,14 +80,38 @@ export const getTransactionByHash = async (hash) => {
     throw error;
   }
 };
-
-export const getTransactions = async (page, limit) => {
+export const getTransactions = async (page, limit, filters = {}) => {
   try {
+    const params = {
+      page,
+      limit,
+    };
+
+    const {
+      sort,
+      order,
+      startTimestamp,
+      endTimestamp,
+      minIndex,
+      maxIndex,
+      minTransactionFee,
+      maxTransactionFee,
+      minBlockNumber,
+      maxBlockNumber,
+    } = filters;
+
+    if (sort) params.sort = sort;
+    if (order) params.order = order;
+    if (startTimestamp) params.startTimestamp = startTimestamp;
+    if (endTimestamp) params.endTimestamp = endTimestamp;
+    if (minIndex) params.minIndex = minIndex;
+    if (maxIndex) params.maxIndex = maxIndex;
+    if (minTransactionFee) params.minTransactionFee = minTransactionFee;
+    if (maxTransactionFee) params.maxTransactionFee = maxTransactionFee;
+    if (minBlockNumber) params.minBlockNumber = minBlockNumber;
+    if (maxBlockNumber) params.maxBlockNumber = maxBlockNumber;
     const response = await axios.get(`${BASE_URL}/transactions/get`, {
-      params: {
-        page,
-        limit,
-      },
+      params,
     });
     return response.data;
   } catch (error) {
@@ -77,6 +119,7 @@ export const getTransactions = async (page, limit) => {
     throw error;
   }
 };
+
 export const getLatestBlockNumber = async () => {
   try {
     const response = await axios.get(`${BASE_URL}/blocks/count`);

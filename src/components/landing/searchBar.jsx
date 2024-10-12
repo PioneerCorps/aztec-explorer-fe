@@ -54,7 +54,6 @@ export const SearchBar = ({ className }) => {
     return () => clearTimeout(debounceTimer);
   }, [inputValue]);
 
-  // Click outside to close search results
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
@@ -72,7 +71,7 @@ export const SearchBar = ({ className }) => {
   }, []);
 
   const renderSearchResults = () => {
-    console.log(searchResult);
+    // console.log(searchResult);
 
     const renderResults = (type) => {
       if (!searchResult || searchResult?.[type]?.length === 0) {

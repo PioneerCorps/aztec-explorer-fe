@@ -33,6 +33,7 @@ export const TxBox = () => {
       try {
         const tx = await getTransactionByHash(hash);
         const block = await getBlockByNumber(tx.blockNumber);
+
         setBlock(block);
         setTransaction(tx);
       } catch (err) {

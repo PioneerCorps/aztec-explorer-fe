@@ -101,14 +101,14 @@ export const LatestTx = () => {
       try {
         const data = await getTransactions(1, 10);
         console.log(data);
-        setTransactions(data);
+        setTransactions(data.transactions);
 
         // Fetch block hashes for the fetched transactions
-        data.forEach((tx) => {
+        data.transactions.forEach((tx) => {
           getBlockHash(tx.blockNumber);
         });
       } catch (err) {
-        console.error("Failed to fetch blocks:", err);
+        console.error("Failed to fetch transactions:", err);
         setError("Failed to fetch blocks. Please try again later.");
       } finally {
         setLoading(false);

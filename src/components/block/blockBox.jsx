@@ -8,6 +8,8 @@ import { formatDate, timeSince } from "../common/getTimePassed";
 import { TxTable } from "../transaction/txTable";
 import { Copy } from "../common/copyToClipboard";
 import LoadingCard from "../common/loadingCard";
+import { useListFilter } from "../../hooks/useListFilter";
+
 export const BlockBox = () => {
   const [block, setBlock] = useState([]);
   const [transactions, setTransactions] = useState([]);
@@ -15,6 +17,10 @@ export const BlockBox = () => {
   const [error, setError] = useState(null);
   const { hash } = useParams();
   console.log(block);
+
+  const { renderFilterElement, filters, setSort, currentSort } =
+    useListFilter();
+
   const fieldLabels = {
     number: "Block Number",
     hash: "Block Hash",
@@ -113,7 +119,14 @@ export const BlockBox = () => {
           <SearchBar className={"below-lg:hidden"} />
         </div>
         {renderBlockInfo()}
-        <TxTable transactions={transactions} loading={loading} error={error} />
+        <TxTable
+          transactions={transactions}
+          loading={loading}
+          error={error}
+          renderFilterElement={renderFilterElement}
+          currentSort={currentSort}
+          setSort={setSort}
+        />
       </div>
     </>
   );

@@ -22,7 +22,7 @@ export const LatestBlocks = () => {
       try {
         const data = await getBlocks(1, 10);
 
-        setBlocks(data);
+        setBlocks(data.blocks);
       } catch (err) {
         console.error("Failed to fetch blocks:", err);
         setError("Failed to fetch blocks. Please try again later.");

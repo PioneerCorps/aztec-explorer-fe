@@ -3,6 +3,8 @@ import { getBlocks, getLatestBlockNumber } from "../../api/api";
 import { usePagination } from "../../hooks/usePagination";
 import { SearchBar } from "../landing/searchBar";
 import { BlockTable } from "./blockTable";
+import { useListFilter } from "../../hooks/useListFilter";
+import LoadingCard from "../common/loadingCard";
 export const BlockList = () => {
   const [blocks, setBlocks] = useState([]);
   const [latestBlockNumber, setLatestBlockNumber] = useState(undefined);
@@ -10,8 +12,14 @@ export const BlockList = () => {
   const [error, setError] = useState(null);
   const blocksCache = useRef({});
 
+  const { renderFilterElement, filters, setSort, currentSort } =
+    useListFilter();
   const { page, limit, renderPaginationButtons } =
     usePagination(latestBlockNumber);
+
+  useEffect(() => {
+    blocksCache.current = {}; // Clear the cache when filters change
+  }, [filters]);
 
   useEffect(() => {
     const fetchBlocks = async () => {
@@ -33,13 +41,15 @@ export const BlockList = () => {
       }
 
       try {
-        const data = await getBlocks(page, limit);
+        const data = await getBlocks(page, limit, filters);
         const latestBlockNum = await getLatestBlockNumber();
 
-        setLatestBlockNumber(latestBlockNum?.count);
-
-        setBlocks(data);
-        blocksCache.current[page] = data;
+        const filterMaxItems = data?.total;
+        const defaultMaxItems = latestBlockNum?.count;
+        console.log("data", data);
+        setLatestBlockNumber(filterMaxItems ? filterMaxItems : defaultMaxItems);
+        setBlocks(data.blocks);
+        blocksCache.current[page] = data.blocks;
       } catch (err) {
         console.error("Failed to fetch blocks:", err);
         setError("Failed to fetch blocks. Please try again later.");
@@ -49,7 +59,7 @@ export const BlockList = () => {
     };
 
     fetchBlocks();
-  }, [page, limit]);
+  }, [page, limit, filters]);
 
   useEffect(() => {
     return () => {
@@ -64,12 +74,26 @@ export const BlockList = () => {
         <div className="primary-box below-lg:mt-8">
           <div className="flex justify-between items-center ">
             <div className="flex flex-col w-full gap-2 pb-4">
-              <h1 className="headerExa w-full !text-2xl">{`Blocks`}</h1>
-              <div className="text-link !no-underline">{`${latestBlockNumber} blocks found!`}</div>
+              <h1 className="headerExa w-full !text-2xl">Blocks</h1>
+              <div className="text-link !no-underline">
+                {latestBlockNumber ? (
+                  `${latestBlockNumber} `
+                ) : (
+                  <LoadingCard className={"!h-[16px] !w-[30px]"} />
+                )}
+                blocks found!
+              </div>
             </div>
             <SearchBar className={"below-lg:hidden"} />
           </div>
-          <BlockTable blocks={blocks} loading={loading} error={error} />
+          <BlockTable
+            blocks={blocks}
+            loading={loading}
+            error={error}
+            renderFilterElement={renderFilterElement}
+            currentSort={currentSort}
+            setSort={setSort}
+          />
           {renderPaginationButtons()}
         </div>
       </div>

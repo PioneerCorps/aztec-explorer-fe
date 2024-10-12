@@ -8,25 +8,73 @@ export const TxTable = ({
   loading,
   error,
   loaderLength = 10,
+  renderFilterElement,
+  setSort,
+  currentSort,
 }) => {
+  console.log(transactions);
   const renderFields = () => (
     <>
       <h1 className="!hidden below-mobile:flex">Transactions</h1>
       <div className="flex px-[16px] pb-2 font-medium justify-between gap-5 text-sm text-header below-lg:text-xs below-mobile:hidden ">
         <div className="w-[22%] elow-lg:text-center flex items-center">
-          Hash
+          <span>Hash</span>
         </div>
         <div className="w-[10%] elow-lg:text-center flex items-center">
-          Block
+          <span
+            onClick={() => {
+              setSort("blockNumber");
+            }}
+            className={`${
+              currentSort == "blockNumber" && "underline"
+            } cursor-pointer hover:brightness-95`}
+          >
+            Block
+          </span>
+          {renderFilterElement("blockNumber")}
         </div>
-        <div className="w-[18%] elow-lg:text-center flex items-center">Age</div>
+        <div className="w-[18%] elow-lg:text-center flex items-center">
+          <span
+            onClick={() => {
+              setSort("timestamp");
+            }}
+            className={`${
+              currentSort == "timestamp" && "underline"
+            } cursor-pointer hover:brightness-95`}
+          >
+            Age
+          </span>
+          {renderFilterElement("timestamp")}
+        </div>
         <div className="w-[10%] elow-lg:text-center flex items-center">
-          Index
+          <span
+            onClick={() => {
+              // setSort("index");
+            }}
+            className={`${
+              currentSort == "transactionFee" && "underline"
+            } cursor-pointer hover:brightness-95`}
+          >
+            Index
+          </span>
+          {renderFilterElement("index")}
         </div>
         <div className="w-[22%] elow-lg:text-center flex items-center">
-          Nullifier
+          <span>Nullifier</span>
         </div>
-        <div className="w-[10%] elow-lg:text-center flex items-center">Fee</div>
+        <div className="w-[10%] elow-lg:text-center flex items-center">
+          <span
+            onClick={() => {
+              setSort("transactionFee");
+            }}
+            className={`${
+              currentSort == "transactionFee" && "underline"
+            } cursor-pointer hover:brightness-95`}
+          >
+            Fee
+          </span>
+          {renderFilterElement("txFee")}
+        </div>
       </div>
     </>
   );

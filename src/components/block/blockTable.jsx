@@ -2,34 +2,83 @@ import { Link } from "react-router-dom";
 import LoadingCard from "../common/loadingCard";
 import { timeSince } from "../common/getTimePassed";
 import { Copy } from "../common/copyToClipboard";
-export const BlockTable = ({ blocks, loading, error }) => {
+
+export const BlockTable = ({
+  blocks,
+  loading,
+  error,
+  renderFilterElement,
+  setSort,
+  currentSort,
+}) => {
   const renderFields = () => {
     return (
       <>
         <h1 className="!hidden below-mobile:flex">Blocks</h1>
         <div className="flex px-[16px] pb-6 font-medium justify-between gap-0 below-lg:text-xs below-mobile:hidden text-header">
           <div className="w-[21%] below-lg:text-center flex items-center">
-            Hash
+            <span>Hash</span>
           </div>
           <div className="w-[15%] below-lg:text-center flex items-center">
-            Number
+            <span
+              className={`${
+                currentSort == "number" && "underline"
+              } cursor-pointer hover:brightness-95`}
+              onClick={() => {
+                setSort("number");
+              }}
+            >
+              Number
+            </span>
+          </div>
+          <div className="w-[18%] below-lg:text-center flex items-center ">
+            <span
+              onClick={() => {
+                setSort("timestamp");
+              }}
+              className={`${
+                currentSort == "timestamp" && "underline"
+              } cursor-pointer hover:brightness-95`}
+            >
+              Age
+            </span>
+            {renderFilterElement("timestamp")}
+          </div>
+          <div className="w-[10%] below-lg:text-center flex items-center ">
+            <span
+              onClick={() => {
+                setSort("txCount");
+              }}
+              className={`${
+                currentSort == "txCount" && "underline"
+              } cursor-pointer hover:brightness-95`}
+            >
+              Tx Count
+            </span>
+            {renderFilterElement("txCount")}
           </div>
           <div className="w-[18%] below-lg:text-center flex items-center">
-            Age
+            <span>Fee Recipient</span>
           </div>
-          <div className="w-[10%] below-lg:text-center flex items-center">
-            Tx Count
-          </div>
-          <div className="w-[18%] below-lg:text-center flex items-center">
-            Fee Recipient
-          </div>
-          <div className="w-[10%] below-lg:text-center flex items-center">
-            Fee
+          <div className="w-[10%] below-lg:text-center flex items-center  ">
+            <span
+              onClick={() => {
+                setSort("totalFees");
+              }}
+              className={`${
+                currentSort == "totalFees" && "underline"
+              } cursor-pointer hover:brightness-95`}
+            >
+              Fee
+            </span>{" "}
+            {renderFilterElement("fee")}
           </div>
         </div>
       </>
     );
   };
+  // console.log(blocks);
+  // console.log(new Date(Date.now()).toISOString());
   const renderBlockList = () => {
     const blockCards = blocks.map((block) => {
       return (

@@ -104,7 +104,7 @@ img {
 }
 
 .text-link {
-  @apply font-thin dark:font-light underline flex items-center gap-1 text-pastelPink dark:text-textDark1;
+  @apply font-thin dark:font-light underline flex items-center gap-1 text-pastelPink dark:text-textDark1 cursor-pointer;
 }
 .text-dark {
   @apply font-thin dark:font-light flex items-center gap-1 text-white1 dark:text-textDark1;
