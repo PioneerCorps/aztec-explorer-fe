@@ -9,7 +9,7 @@ export const Footer = () => {
           <div className="text-xs font-thin tracking-wide">PioneerLabs</div>
         </div>
       </div>
-      <div className="flex justify-between items-center w-1/2 below-mobile:w-full text-white font-extralight">
+      <div className="flex justify-between items-center w-1/2 below-mobile:w-[80%] text-white font-extralight">
         <div className=" flex flex-col gap-2 h-full">
           <h1 className="text-bgLight2 text-lg">About Us</h1>
           <p className="hover:underline cursor-pointer">Contact Us</p>

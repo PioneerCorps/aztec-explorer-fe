@@ -85,7 +85,7 @@ export const Header = () => {
         ref={sideBarRef}
         className={`
           ${!isPanelOpen && "!translate-x-full"} 
-          fixed top-0 right-0  bg-bgDark2 w-[60%] h-full z-[100] px-5 py-10 flex flex-col justify-between duration-300 items-end`}
+          fixed top-0 right-0 bg-bgDark2 dark:bg-bgDark3 w-[60%] h-full z-[100] px-5 py-10 flex flex-col justify-between duration-300 items-end`}
       >
         <img
           className=" h-[52px] w-[52px]  min-h-[52px] min-w-[52px] "
@@ -93,11 +93,27 @@ export const Header = () => {
         />
         <div className="flex flex-col gap-7 text-xl text-white cursor-pointer w-full">
           <div className=" border-b pb-3 border-bgLight1">Network</div>
-          <Link to={"/addresses"} className=" border-b pb-3 border-bgLight1">
+          <Link
+            onClick={() => setIsPanelOpen(false)}
+            to={"/addresses"}
+            className=" border-b pb-3 border-bgLight1"
+          >
             Contracts
           </Link>
-          <div className=" border-b pb-3 border-bgLight1">Developers</div>
-          <div className=" border-b pb-3 border-bgLight1">More</div>
+          <Link
+            onClick={() => setIsPanelOpen(false)}
+            to={"/blocks"}
+            className=" border-b pb-3 border-bgLight1"
+          >
+            Blocks
+          </Link>
+          <Link
+            onClick={() => setIsPanelOpen(false)}
+            to={"/transactions"}
+            className=" border-b pb-3 border-bgLight1"
+          >
+            Transactions
+          </Link>
         </div>
         <div className="flex gap-2">
           <ThemeToggler />

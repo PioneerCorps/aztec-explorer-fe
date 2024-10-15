@@ -123,18 +123,18 @@ export const TxTable = ({
       >
         <div className="flex flex-col gap-2">
           <div className="flex gap-2">
-            <div className="text-white1">Tx # :</div>
-            <div className="underline text-pastelPink">{`${tx.hash.slice(
+            <div className="text-header">Tx # :</div>
+            <div className="text-link">{`${tx.hash.slice(
               0,
               5
             )}..........${tx.hash.slice(tx.hash.length - 7)}`}</div>
           </div>
           <div className="flex gap-2">
-            <div className="text-white1">Age :</div>
-            <div className="">{`${timeSince(tx.timestamp)}`}</div>
+            <div className="text-header">Age :</div>
+            <div className="text-dark">{`${timeSince(tx.timestamp)}`}</div>
           </div>
           <div className="flex gap-2 items-center">
-            <div>Fee :</div>
+            <div className="text-header">Fee :</div>
             <div className=" button-orange !max-w-none !px-1 !py-1 !text-[10px] !rounded-md">
               {tx.transactionFee} TST
             </div>
