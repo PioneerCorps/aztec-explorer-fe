@@ -98,7 +98,7 @@ export const SearchBar = ({ className }) => {
                   result?.hash ? result?.hash : result?.address
                 }`}
                 key={index}
-                className="text-white font-extralight rounded-md text-sm p-2 flex items-center gap-4 cursor-pointer hover:bg-pinkOp"
+                className="text-white font-extralight rounded-md text-sm p-2 flex items-center gap-4 cursor-pointer hover:bg-white2 hover:bg-opacity-15"
               >
                 <img
                   className="h-8 rounded-full"

@@ -44,7 +44,7 @@ export const AddressTable = ({ accounts, loading, error }) => {
             />
           </div>
 
-          <div className=" w-[10%] button-orange !max-w-none text-dark">
+          <div className=" w-[10%] button-orange !max-w-none ">
             {account.balance}
           </div>
         </div>
