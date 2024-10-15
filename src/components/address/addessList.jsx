@@ -1,24 +1,28 @@
 import { useEffect, useState, useRef } from "react";
-import { getBlocks, getLatestBlockNumber } from "../../api/api";
 import { usePagination } from "../../hooks/usePagination";
 import { SearchBar } from "../landing/searchBar";
-import { BlockTable } from "./blockTable";
 import { useListFilter } from "../../hooks/useListFilter";
 import LoadingCard from "../common/loadingCard";
-export const BlockList = () => {
-  const [blocks, setBlocks] = useState([]);
-  const [latestBlockNumber, setLatestBlockNumber] = useState(undefined);
+import {
+  getAccountCount,
+  getAddresses,
+  getLatestBlockNumber,
+} from "../../api/api";
+import { AddressTable } from "./addressTable";
+export const AddressList = () => {
+  const [accounts, setAccounts] = useState([]);
+  const [totalAddresses, setLatestBlockNumber] = useState(undefined);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const blocksCache = useRef({});
+  const addressesCache = useRef({});
 
   const { renderFilterElement, filters, setSort, currentSort } =
     useListFilter();
   const { page, limit, renderPaginationButtons } =
-    usePagination(latestBlockNumber);
+    usePagination(totalAddresses);
 
   useEffect(() => {
-    blocksCache.current = {}; // Clear the cache when filters change
+    addressesCache.current = {}; // Clear the cache when filters change
   }, [filters]);
 
   useEffect(() => {
@@ -26,33 +30,33 @@ export const BlockList = () => {
       setLoading(true);
       setError(null);
 
-      const maxPages = Math.ceil(latestBlockNumber / limit);
-      const lastPageItemCount = latestBlockNumber % limit;
+      const maxPages = Math.ceil(totalAddresses / limit);
+      const lastPageItemCount = totalAddresses % limit;
 
       if (
-        blocksCache.current[page] &&
-        (blocksCache.current[page].length === limit ||
+        addressesCache.current[page] &&
+        (addressesCache.current[page].length === limit ||
           (page === maxPages &&
-            blocksCache.current[page].length === lastPageItemCount))
+            addressesCache.current[page].length === lastPageItemCount))
       ) {
-        setBlocks(blocksCache.current[page]);
+        setAccounts(addressesCache.current[page]);
         setLoading(false);
         return;
       }
 
       try {
-        const data = await getBlocks(page, limit, filters);
-        const latestBlockNum = await getLatestBlockNumber();
-        console.log(data);
+        const data = await getAddresses(page, limit, filters);
+        const totalAddressesIndexed = await getAccountCount();
+
         const filterMaxItems = data?.total;
-        const defaultMaxItems = latestBlockNum?.count;
+        const defaultMaxItems = totalAddressesIndexed?.count;
         console.log("data", data);
         setLatestBlockNumber(filterMaxItems ? filterMaxItems : defaultMaxItems);
-        setBlocks(data.blocks);
-        blocksCache.current[page] = data.blocks;
+        setAccounts(data.accounts);
+        addressesCache.current[page] = data.accounts;
       } catch (err) {
-        console.error("Failed to fetch blocks:", err);
-        setError("Failed to fetch blocks. Please try again later.");
+        console.error("Failed to fetch accounts:", err);
+        setError("Failed to fetch accounts. Please try again later.");
       } finally {
         setLoading(false);
       }
@@ -63,7 +67,7 @@ export const BlockList = () => {
 
   useEffect(() => {
     return () => {
-      blocksCache.current = {};
+      addressesCache.current = {};
     };
   }, []);
 
@@ -74,26 +78,19 @@ export const BlockList = () => {
         <div className="primary-box below-lg:mt-8">
           <div className="flex justify-between items-center ">
             <div className="flex flex-col w-full gap-2 pb-4">
-              <h1 className="headerExa w-full !text-2xl">Blocks</h1>
+              <h1 className="headerExa w-full !text-2xl">Contracts</h1>
               <div className="text-link !no-underline">
-                {latestBlockNumber ? (
-                  `${latestBlockNumber} `
+                {totalAddresses ? (
+                  `${totalAddresses} `
                 ) : (
                   <LoadingCard className={"!h-[16px] !w-[30px]"} />
                 )}
-                blocks found!
+                Contracts found!
               </div>
             </div>
             <SearchBar className={"below-lg:hidden"} />
           </div>
-          <BlockTable
-            blocks={blocks}
-            loading={loading}
-            error={error}
-            renderFilterElement={renderFilterElement}
-            currentSort={currentSort}
-            setSort={setSort}
-          />
+          <AddressTable accounts={accounts} loading={loading} error={error} />
           {renderPaginationButtons()}
         </div>
       </div>

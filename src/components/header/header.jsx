@@ -14,15 +14,20 @@ export const Header = () => {
   const [type, setType] = useState("main");
   const [isPanelOpen, setIsPanelOpen] = useState(false);
   const sideBarRef = useRef(null);
-  const tabs = ["Network", "Tokens", "Developers", "More"];
+  const tabs = ["Network", "Contracts", "Blocks", "Transactions"];
   const path = useLocation();
   const pathname = path.pathname.replace(/\//gi, "");
   const renderLandingHeader = () => {
     const header = tabs.map((tab) => {
+      const tabLow = tab.toLowerCase();
       return (
-        <div key={Math.random()} className="cursor-pointer">
+        <Link
+          to={`/${tabLow == "contracts" ? "addresses" : tabLow}`}
+          key={tab}
+          className="cursor-pointer"
+        >
           {tab}
-        </div>
+        </Link>
       );
     });
 
@@ -84,7 +89,9 @@ export const Header = () => {
       >
         <div className="flex flex-col gap-7 text-xl text-white cursor-pointer">
           <div className=" border-b pb-3 border-bgLight1">Network</div>
-          <div className=" border-b pb-3 border-bgLight1">Tokens</div>
+          <Link to={"/addresses"} className=" border-b pb-3 border-bgLight1">
+            Contracts
+          </Link>
           <div className=" border-b pb-3 border-bgLight1">Developers</div>
           <div className=" border-b pb-3 border-bgLight1">More</div>
         </div>
