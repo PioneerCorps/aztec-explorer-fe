@@ -47,7 +47,7 @@ export const LatestBlocks = () => {
           key={block.hash}
           className="card below-mobile:flex-col below-mobile:gap-3 below-mobile:py-5 below-mobile:items-start "
         >
-          <div className="flex items-center gap-3 below-mobile:w-full below-mobile:border-b below-mobile:border-bgLight1 below-mobile:pb-3">
+          <div className="flex items-center gap-3 below-mobile:w-full below-mobile:border-b below-mobile:border-bgLight2 below-mobile:pb-3">
             <PiCubeFocus
               className="text-white1 dark:text-textDark1 h-7 w-7 min-w-7 min-h-7 below-mobile:hidden
             "
@@ -66,7 +66,7 @@ export const LatestBlocks = () => {
               <Copy className="dark:text-textDark2" string={block.hash} />
             </div>
           </div>
-          <div className="flex items-end justify-between gap-1 !min-w-[105px] below-mobile:w-full below-mobile:border-b below-mobile:border-bgLight1 below-mobile:pb-3 below-lg:justify-normal">
+          <div className="flex items-end justify-between gap-1 !min-w-[105px] below-mobile:w-full below-mobile:border-b below-mobile:border-bgLight2 below-mobile:pb-3 below-lg:justify-normal">
             <div className="flex flex-col font-light ">
               <div className="flex gap-1 text-header">Builder:</div>
               <div className="flex gap-1 ">

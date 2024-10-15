@@ -48,6 +48,7 @@ export default {
       screens: {
         "below-lg": { max: "1210px" },
         "below-mobile": { max: "715px" },
+        "above-mobile": { min: "714px" },
         "above-2k": { min: "2561px" },
       },
       keyframes: {
@@ -64,6 +65,9 @@ export default {
   plugins: [
     plugin(function ({ addUtilities }) {
       const newUtilities = {
+        ".text-shadow-none": {
+          textShadow: "1px 1px 2px rgba(0, 0, 0, 0.0)",
+        },
         ".text-shadow-sm": {
           textShadow: "1px 1px 2px rgba(0, 0, 0, 0.55)",
         },

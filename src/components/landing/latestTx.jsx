@@ -38,7 +38,7 @@ export const LatestTx = () => {
         key={tx.hash}
         className="card below-mobile:flex-col below-mobile:gap-3 below-mobile:py-5 below-mobile:items-start"
       >
-        <div className="flex items-center gap-3 below-mobile:w-full below-mobile:border-b below-mobile:border-bgLight1 below-mobile:pb-3 ">
+        <div className="flex items-center gap-3 below-mobile:w-full below-mobile:border-b below-mobile:border-bgLight2 below-mobile:pb-3 ">
           <MdOutlineReceiptLong className="text-white2 h-7 w-7 min-h-7 min-w-7 below-mobile:hidden dark:text-textDark1" />
           <div className="flex h-full items-end justify-between gap-1 !min-w-[120px]">
             <Link to={`/tx/${tx.hash}`} className="flex flex-col">
@@ -52,7 +52,7 @@ export const LatestTx = () => {
             <Copy className="dark:text-textDark2" string={tx.hash} />
           </div>
         </div>
-        <div className="flex items-end justify-between gap-1 !min-w-[105px] below-mobile:w-full below-mobile:border-b below-mobile:border-bgLight1 below-mobile:pb-3 below-lg:justify-normal">
+        <div className="flex items-end justify-between gap-1 !min-w-[105px] below-mobile:w-full below-mobile:border-b below-mobile:border-bgLight2 below-mobile:pb-3 below-lg:justify-normal">
           <div className="flex flex-col">
             <Link
               className="text-header"

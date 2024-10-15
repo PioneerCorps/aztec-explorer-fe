@@ -134,19 +134,19 @@ export const BlockTable = ({
           </div>
 
           <div className="flex gap-2">
-            <div className="text-white1">Block # :</div>
-            <div className="underline text-pastelPink">
+            <div className="text-header">Block # :</div>
+            <div className="text-link">
               {`${block.hash.slice(0, 5)}..........${block.hash.slice(
                 block.hash.length - 7
               )}`}
             </div>
           </div>
           <div className="flex gap-2">
-            <div className="text-white1">Age :</div>
-            <div className="">{`${timeSince(block.timestamp)}`}</div>
+            <div className="text-header">Age :</div>
+            <div className="text-dark">{`${timeSince(block.timestamp)}`}</div>
           </div>
           <div className="flex gap-2 items-center">
-            <div>Total Fees :</div>
+            <div className="text-header">Total Fees :</div>
             <div className=" button-orange !max-w-none !px-1 !py-1 !text-[10px] !rounded-md">
               {block.totalFees} TST
             </div>

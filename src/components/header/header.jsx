@@ -60,19 +60,19 @@ export const Header = () => {
       <div
         className={`
           ${type == "main" && "absolute"}
-          ${type == "alt" && "header"}
+          ${type == "alt" && "header relative"}
            h-[100px] py-5 flex justify-between items-center w-full z-50  text-sm px-[6.5vw]`}
       >
-        <Link to="/">
+        <Link className="z-50" to="/">
           <img
             className=" h-[52px] w-[52px]  min-h-[52px] min-w-[52px]"
             src={logo}
           />
         </Link>
-        <div className="cursor-pointer">
+        <div className="cursor-pointer z-50">
           <MdMenu
             onClick={() => setIsPanelOpen(true)}
-            className="w-12 h-12 min-w-12 min-h-12 text-white "
+            className="w-12 h-12 min-w-12 min-h-12 text-white  "
           />
         </div>
       </div>
@@ -85,9 +85,13 @@ export const Header = () => {
         ref={sideBarRef}
         className={`
           ${!isPanelOpen && "!translate-x-full"} 
-          fixed top-0 right-0  bg-bgDark2 w-[60%] h-full z-[100] px-5 py-10 flex flex-col justify-between duration-300`}
+          fixed top-0 right-0  bg-bgDark2 w-[60%] h-full z-[100] px-5 py-10 flex flex-col justify-between duration-300 items-end`}
       >
-        <div className="flex flex-col gap-7 text-xl text-white cursor-pointer">
+        <img
+          className=" h-[52px] w-[52px]  min-h-[52px] min-w-[52px] "
+          src={logo}
+        />
+        <div className="flex flex-col gap-7 text-xl text-white cursor-pointer w-full">
           <div className=" border-b pb-3 border-bgLight1">Network</div>
           <Link to={"/addresses"} className=" border-b pb-3 border-bgLight1">
             Contracts
@@ -96,12 +100,10 @@ export const Header = () => {
           <div className=" border-b pb-3 border-bgLight1">More</div>
         </div>
         <div className="flex gap-2">
-          <div className="button-orange border border-purpleOp50 !rounded-[8px] w-full !p-2">
-            <MdOutlinePersonOutline className=" !p-0 min-w-4 min-h-4 w-4 h-4" />
+          <ThemeToggler />
+          <div className="button-orange border border-purpleOp50 !rounded-[8px] w-full !p-2 gap-2 text-sm">
+            <MdOutlinePersonOutline className=" !p-0 min-w-4 min-h-4 w-4 h-4 " />
             Profile
-          </div>
-          <div className="button-orange border border-purpleOp50 flex items-center">
-            <MdOutlineDarkMode className="  min-w-4 min-h-4 w-4 h-4" />
           </div>
         </div>
       </div>

@@ -43,9 +43,9 @@ export const useListFilter = () => {
             ref={filterRef}
             className={`${
               !isFilterOpen && "!hidden"
-            } absolute top-[25px] w-[250px] primary-box !p-3 z-50 !rounded-md flex flex-col`}
+            } absolute top-[25px] w-[250px] primary-box !p-3 z-50 !rounded-md flex flex-col dark:backdrop-blur-[3px]`}
           >
-            <div className="text-header text-[10px] pb-1 border-b border-purpleOp50 flex justify-between">
+            <div className="text-header text-[10px] pb-1 border-b border-purpleOp50 flex justify-between ">
               Duration
               <div
                 onClick={() => {
@@ -56,7 +56,7 @@ export const useListFilter = () => {
                   });
                   setIsFilterOpen(false);
                 }}
-                className="text-link cursor-pointer"
+                className="text-link cursor-pointer dark:!text-pastelBlue !text-shadow-none"
               >
                 Clear
               </div>
@@ -176,7 +176,7 @@ export const useListFilter = () => {
             ref={filterRef}
             className={`${
               !isFilterOpen && "!hidden"
-            } absolute top-[25px] -left-[100px] w-[250px] primary-box !p-3 z-50 !rounded-md flex flex-col`}
+            } absolute top-[25px] -left-[100px] w-[250px] primary-box dark:backdrop-blur-[3px] !p-3 z-50 !rounded-md flex flex-col`}
           >
             <h1 className="text-header font-light text-[10px] pb-1 border-b border-purpleOp50 flex justify-between items-center">
               Min Fee Amount{" "}
@@ -191,7 +191,7 @@ export const useListFilter = () => {
                   });
                   setIsFilterOpen(false);
                 }}
-                className="text-link"
+                className="text-link cursor-pointer dark:!text-pastelBlue !text-shadow-none"
               >
                 Clear
               </div>
@@ -224,7 +224,7 @@ export const useListFilter = () => {
                     minTotalFees: minFilter,
                   });
                 }}
-                className="button-green text-[10px]"
+                className="button-green dark:bg-pastelGreen !py-[2px] text-[10px] !font-normal"
               >
                 Apply
               </button>
@@ -232,7 +232,7 @@ export const useListFilter = () => {
                 onClick={() => {
                   setIsFilterOpen(false);
                 }}
-                className="button-orange !py-0 text-[10px]"
+                className="button-orange dark:bg-pastelOrange !py-[2px] text-[10px]"
               >
                 Cancel
               </button>
@@ -255,7 +255,7 @@ export const useListFilter = () => {
             ref={filterRef}
             className={`${
               !isFilterOpen && "!hidden"
-            } absolute top-[25px] -left-[100px] w-[250px] primary-box !p-3 z-50 !rounded-md flex flex-col`}
+            } absolute top-[25px] -left-[100px] w-[250px] primary-box dark:backdrop-blur-[3px] !p-3 z-50 !rounded-md flex flex-col`}
           >
             <h1 className="text-header font-light text-[10px] pb-1 border-b border-purpleOp50 flex justify-between items-center">
               Min Transaction Amount
@@ -270,7 +270,7 @@ export const useListFilter = () => {
                   });
                   setIsFilterOpen(false);
                 }}
-                className="text-link"
+                className="text-link cursor-pointer dark:!text-pastelBlue !text-shadow-none"
               >
                 Clear
               </div>
@@ -303,7 +303,7 @@ export const useListFilter = () => {
                     minTxCount: minFilter,
                   });
                 }}
-                className="button-green text-[10px]"
+                className="button-green dark:bg-pastelGreen !py-[2px] text-[10px] !font-normal"
               >
                 Apply
               </button>
@@ -311,7 +311,7 @@ export const useListFilter = () => {
                 onClick={() => {
                   setIsFilterOpen(false);
                 }}
-                className="button-orange !py-0 text-[10px]"
+                className="button-orange !font-normal dark:bg-pastelOrange !py-[2px] text-[10px]"
               >
                 Cancel
               </button>
@@ -334,7 +334,7 @@ export const useListFilter = () => {
             ref={filterRef}
             className={`${
               !isFilterOpen && "!hidden"
-            } absolute top-[25px] -left-[100px] w-[250px] primary-box !p-3 z-50 !rounded-md flex flex-col`}
+            } absolute top-[25px] -left-[100px] w-[250px] primary-box dark:backdrop-blur-[3px] !p-3 z-50 !rounded-md flex flex-col`}
           >
             <h1 className="text-header font-light text-[10px] pb-1 border-b border-purpleOp50 flex justify-between items-center">
               Min Fee Amount{" "}
@@ -349,7 +349,7 @@ export const useListFilter = () => {
                   });
                   setIsFilterOpen(false);
                 }}
-                className="text-link"
+                className="text-link cursor-pointer dark:!text-pastelBlue !text-shadow-none"
               >
                 Clear
               </div>
@@ -382,7 +382,7 @@ export const useListFilter = () => {
                     minTransactionFee: minFilter,
                   });
                 }}
-                className="button-green text-[10px]"
+                className="button-green dark:bg-pastelGreen !py-[2px] text-[10px] !font-normal"
               >
                 Apply
               </button>
@@ -390,7 +390,7 @@ export const useListFilter = () => {
                 onClick={() => {
                   setIsFilterOpen(false);
                 }}
-                className="button-orange !py-0 text-[10px]"
+                className="button-orange !font-normal dark:bg-pastelOrange !py-[2px] text-[10px]"
               >
                 Cancel
               </button>
@@ -413,7 +413,7 @@ export const useListFilter = () => {
             ref={filterRef}
             className={`${
               !isFilterOpen && "!hidden"
-            } absolute top-[25px] -left-[100px] w-[250px] primary-box !p-3 z-50 !rounded-md flex flex-col`}
+            } absolute top-[25px] -left-[100px] w-[250px] primary-box dark:backdrop-blur-[3px] !p-3 z-50 !rounded-md flex flex-col`}
           >
             <h1 className="text-header font-light text-[10px] pb-1 border-b border-purpleOp50 flex justify-between items-center">
               Min Index
@@ -428,7 +428,7 @@ export const useListFilter = () => {
                   });
                   setIsFilterOpen(false);
                 }}
-                className="text-link"
+                className="text-link cursor-pointer dark:!text-pastelBlue !text-shadow-none"
               >
                 Clear
               </div>
@@ -461,7 +461,7 @@ export const useListFilter = () => {
                     minIndex: minFilter,
                   });
                 }}
-                className="button-green text-[10px]"
+                className="button-green dark:bg-pastelGreen !py-[2px] text-[10px] !font-normal"
               >
                 Apply
               </button>
@@ -469,7 +469,7 @@ export const useListFilter = () => {
                 onClick={() => {
                   setIsFilterOpen(false);
                 }}
-                className="button-orange !py-0 text-[10px]"
+                className="button-orange  !font-normal dark:bg-pastelOrange !py-[2px] text-[10px]"
               >
                 Cancel
               </button>
@@ -492,7 +492,7 @@ export const useListFilter = () => {
             ref={filterRef}
             className={`${
               !isFilterOpen && "!hidden"
-            } absolute top-[25px] -left-[100px] w-[250px] primary-box !p-3 z-50 !rounded-md flex flex-col`}
+            } absolute top-[25px] -left-[100px] w-[250px] primary-box dark:backdrop-blur-[3px] !p-3 z-50 !rounded-md flex flex-col`}
           >
             <h1 className="text-header font-light text-[10px] pb-1 border-b border-purpleOp50 flex justify-between items-center">
               Min Block Number
@@ -507,7 +507,7 @@ export const useListFilter = () => {
                   });
                   setIsFilterOpen(false);
                 }}
-                className="text-link"
+                className="text-link cursor-pointer dark:!text-pastelBlue !text-shadow-none"
               >
                 Clear
               </div>
@@ -540,7 +540,7 @@ export const useListFilter = () => {
                     minBlockNumber: minFilter,
                   });
                 }}
-                className="button-green text-[10px]"
+                className="button-green dark:bg-pastelGreen !py-[2px] text-[10px] !font-normal"
               >
                 Apply
               </button>
@@ -548,7 +548,7 @@ export const useListFilter = () => {
                 onClick={() => {
                   setIsFilterOpen(false);
                 }}
-                className="button-orange !py-0 text-[10px]"
+                className="button-orange !font-normal dark:bg-pastelOrange !py-[2px] text-[10px]"
               >
                 Cancel
               </button>

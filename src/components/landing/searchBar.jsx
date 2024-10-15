@@ -40,8 +40,8 @@ export const SearchBar = ({ className }) => {
           }
         } catch (err) {
           console.error("Failed to fetch search results:", err);
-          setError("Failed to search results. Please try again later.");
           setError(true);
+          setOnceLoaded(true);
         } finally {
           setLoading(false);
           setIsVisible(true);
@@ -115,10 +115,10 @@ export const SearchBar = ({ className }) => {
         </div>
       );
     };
-
+    console.log(!isVisible, !onceLoaded, !inputValue);
     const emptyCard = () => {
       return (
-        <div className="font-light text-white1">
+        <div className="font-light  text-white1">
           Search does not match any blocks, transactions or contracts!
         </div>
       );
@@ -131,7 +131,7 @@ export const SearchBar = ({ className }) => {
         }`}
       >
         {emptyResult || error ? (
-          emptyCard()
+          <>{emptyCard()}</>
         ) : loading ? (
           <LoadingSkeleton itemCount={5} />
         ) : (
