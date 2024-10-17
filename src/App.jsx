@@ -12,17 +12,19 @@ import { TransactionList } from "./components/transaction/transactionList";
 import { AddressList } from "./components/address/addessList";
 function App() {
   return (
-    <div className="bg-bgDark1  w-screen relative overflow-x-hidden dark:bg-transparent diamond-grad ">
+    <div className="bg-bgDark1 w-screen min-h-screen flex flex-col relative overflow-x-hidden dark:bg-transparent diamond-grad">
       <Header />
-      <Routes>
-        <Route path="/" element={<Landing />} />
-        <Route path="/tx/:hash" element={<Transaction />} />
-        <Route path="/block/:hash" element={<Block />} />
-        <Route path="/address/:hash" element={<Address />} />
-        <Route path="/addresses" element={<AddressList />} />
-        <Route path="/blocks" element={<BlockList />} />
-        <Route path="/transactions" element={<TransactionList />} />
-      </Routes>
+      <div className="flex-grow">
+        <Routes>
+          <Route path="/" element={<Landing />} />
+          <Route path="/tx/:hash" element={<Transaction />} />
+          <Route path="/block/:hash" element={<Block />} />
+          <Route path="/address/:hash" element={<Address />} />
+          <Route path="/addresses" element={<AddressList />} />
+          <Route path="/blocks" element={<BlockList />} />
+          <Route path="/transactions" element={<TransactionList />} />
+        </Routes>
+      </div>
       <Footer />
     </div>
   );
