@@ -54,7 +54,7 @@ export const Address = () => {
     };
 
     fetchAddress();
-  }, []);
+  }, [hash]);
 
   const renderTabs = () => {
     return (

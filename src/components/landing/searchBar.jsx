@@ -94,11 +94,12 @@ export const SearchBar = ({ className }) => {
           {limitResults.map((result, index) => {
             return (
               <Link
+                onClick={() => isVisible(false)}
                 to={`/${routingList[type]}/${
                   result?.hash ? result?.hash : result?.address
                 }`}
                 key={index}
-                className="text-white font-extralight rounded-md text-sm p-2 flex items-center gap-4 cursor-pointer hover:bg-white2 hover:bg-opacity-15"
+                className="text-white font-extralight rounded-md text-sm p-2 flex items-center gap-4 cursor-pointer hover:bg-white2 hover:bg-opacity-15 overflow-hidden"
               >
                 <img
                   className="h-8 rounded-full"
@@ -115,7 +116,7 @@ export const SearchBar = ({ className }) => {
         </div>
       );
     };
-    console.log(!isVisible, !onceLoaded, !inputValue);
+
     const emptyCard = () => {
       return (
         <div className="font-light  text-white1">

@@ -101,7 +101,7 @@ export const BlockBox = () => {
     };
 
     fetchBlock();
-  }, []);
+  }, [hash]);
 
   return (
     <>
