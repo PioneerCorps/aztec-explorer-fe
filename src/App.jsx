@@ -10,10 +10,14 @@ import { Address } from "./components/address/addressLayout";
 import { BlockList } from "./components/block/blockList";
 import { TransactionList } from "./components/transaction/transactionList";
 import { AddressList } from "./components/address/addessList";
+
+//"https://api.aztec.network/devnet/aztec-node-1/xF4vCY9uuwFMEfk8mR3AQ6JJ8JCX26vo/"
+
 function App() {
   return (
     <div className="bg-bgDark1 w-screen min-h-screen flex flex-col relative overflow-x-hidden dark:bg-transparent diamond-grad">
       <Header />
+
       <div className="flex-grow">
         <Routes>
           <Route path="/" element={<Landing />} />

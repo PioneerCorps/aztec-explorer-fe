@@ -10,8 +10,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@aztec/accounts": "^0.46.7",
-    "@aztec/noir-contracts.js": "^0.46.7",
+    "@aztec/accounts": "0.57.0",
+    "@aztec/aztec.js": "0.57.0",
+    "@aztec/circuits.js": "0.57.0",
+    "@aztec/foundation": "0.57.0",
+    "@aztec/noir-contracts.js": "0.57.0",
+    "@shieldswap/wallet-sdk": "0.57.0",
     "@types/node": "^20.14.11",
     "axios": "^1.7.7",
     "ethereum-blockies-base64": "^1.0.2",
@@ -22,6 +26,7 @@
     "vite-plugin-svgr": "3.2"
   },
   "devDependencies": {
+    "@shieldswap/vite-plugin-aztec": "^0.0.2",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react": "^4.3.1",
@@ -32,6 +37,8 @@
     "eslint-plugin-react-refresh": "^0.4.7",
     "postcss": "^8.4.39",
     "tailwindcss": "^3.4.6",
-    "vite": "^5.3.4"
+    "vite": "^5.3.4",
+    "vite-plugin-node-polyfills": "^0.22.0",
+    "vite-plugin-top-level-await": "^1.4.4"
   }
 }

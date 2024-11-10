@@ -10,6 +10,7 @@ import {
 import { Link, useLocation } from "react-router-dom";
 import logo from "../../assets/logo.webp";
 import { ThemeToggler } from "./themeToggler";
+import { useAccount } from "../../hooks/useAccount";
 export const Header = () => {
   const [type, setType] = useState("main");
   const [isPanelOpen, setIsPanelOpen] = useState(false);
@@ -17,6 +18,7 @@ export const Header = () => {
   const tabs = ["Network", "Contracts", "Blocks", "Transactions"];
   const path = useLocation();
   const pathname = path.pathname.replace(/\//gi, "");
+  const { openModal } = useAccount();
   const renderLandingHeader = () => {
     const header = tabs.map((tab) => {
       const tabLow = tab.toLowerCase();
@@ -155,7 +157,12 @@ export const Header = () => {
               <MdOutlineArrowDropDown className="h-4 w-4 text-white mt-[2px]" />
             </div>
 
-            <div className="button-orange border border-purpleOp50 !rounded-[8px] w-[42px] !p-2">
+            <div
+              onClick={async () => {
+                await openModal();
+              }}
+              className="button-orange border border-purpleOp50 !rounded-[8px] w-[42px] !p-2 cursor-pointer"
+            >
               <MdOutlinePersonOutline className=" !p-0 min-w-4 min-h-4 w-4 h-4" />
             </div>
           </div>
