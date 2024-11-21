@@ -1,38 +1,33 @@
 import { AddressSummary } from "./addressSummary";
-import { AddressTransactionList } from "./addressTransactionList";
-import { PrivateTransactionList } from "./privateTransactionList";
-import { WriteContract } from "./writeContract";
-import { ReadContract } from "./readContract";
-import { ContractCode } from "./contractCode";
-
 import { SearchBar } from "../landing/searchBar";
 import { useState, useEffect } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { getAddress } from "../../api/api";
-
+import { AddressTabs } from "./addressTabs";
 export const Address = () => {
   const [address, setAddress] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const { hash } = useParams();
 
-  const tabs = ["public", "private", "contract", "read", "write"];
+  // const tabs = ["public", "private", "contract", "read", "write"];
+  const tabs = ["bytecode", "read", "write"];
   const location = useLocation();
   const navigate = useNavigate();
 
-  const [tab, setTab] = useState("public");
+  const [tab, setTab] = useState("bytecode");
 
   useEffect(() => {
     const currentHash = location.hash.replace("#", "");
 
     if (!currentHash) {
-      navigate("#public", { replace: true });
-      setTab("public");
+      navigate("#bytecode", { replace: true });
+      setTab("bytecode");
     } else if (tabs.includes(currentHash)) {
       setTab(currentHash);
     } else {
-      navigate("#public", { replace: true });
-      setTab("public");
+      navigate("#bytecode", { replace: true });
+      setTab("bytecode");
     }
   }, [location, navigate, tabs]);
 
@@ -55,14 +50,16 @@ export const Address = () => {
 
     fetchAddress();
   }, [hash]);
-
+  console.log(address);
   const renderTabs = () => {
     return (
       <div className="flex gap-3 py-4">
         {tabs.map((tabName) => (
           <div
             key={tabName}
-            className={`button-orange py-2 ${tab === tabName ? "active" : ""}`}
+            className={`button-orange py-2 text-xs cursor-pointer ${
+              tab === tabName ? "active !bg-pastelOrange saturate-[0.8]" : ""
+            }`}
             onClick={() => navigate(`#${tabName}`)}
           >
             {tabName}
@@ -70,23 +67,6 @@ export const Address = () => {
         ))}
       </div>
     );
-  };
-
-  const renderContent = () => {
-    switch (tab) {
-      case "public":
-        return <AddressTransactionList />;
-      case "private":
-        return <PrivateTransactionList />;
-      case "contract":
-        return <ContractCode />;
-      case "read":
-        return <ReadContract />;
-      case "write":
-        return <WriteContract />;
-      default:
-        return null;
-    }
   };
 
   return (
@@ -101,7 +81,7 @@ export const Address = () => {
         </div>
         <AddressSummary addressInfo={address} />
         {renderTabs()}
-        {/* {renderContent()} */}
+        <AddressTabs tab={tab} addressInfo={address} />
       </div>
     </div>
   );

@@ -17,7 +17,7 @@ export const SearchBar = ({ className }) => {
   const [isVisible, setIsVisible] = useState(false);
 
   const searchResultsRef = useRef(null);
-
+  console.log(searchResult);
   useEffect(() => {
     if (!inputValue || Number(inputValue == 0)) return;
 
@@ -92,6 +92,8 @@ export const SearchBar = ({ className }) => {
             {type.charAt(0).toUpperCase() + type.slice(1)}
           </h1>
           {limitResults.map((result, index) => {
+            if (!result) return null;
+            console.log(result);
             return (
               <Link
                 onClick={() => isVisible(false)}
@@ -104,11 +106,11 @@ export const SearchBar = ({ className }) => {
                 <img
                   className="h-8 rounded-full"
                   src={makeBlockie(
-                    result.address ? result.address : result.hash
+                    result?.address ? result.address : result.hash
                   )}
                 />
                 <p className="text-header">
-                  {result.address ? result.address : result.hash}
+                  {result?.address ? result.address : result.hash}
                 </p>
               </Link>
             );
